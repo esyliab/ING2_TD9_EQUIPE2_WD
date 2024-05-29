@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    background-color: #f3f3f3;
+    padding: 10px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e73be;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header img {
+    height: 50px;
+}
+
+.navigation {
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.navigation a {
+    background-color: #f0f8ff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #1e73be;
+    text-align: center;
+    text-decoration: none;
+    flex: 1;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation a:hover {
+    background-color: #d0e8ff;
+}
+
+.navigation a.active {
+    background-color: #1e73be;
+    color: white;
+}
+
+.jobs {
+    flex: 1;
+    padding: 20px;
+}
+
+.jobs h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #1e73be;
+    margin-bottom: 20px;
+}
+
+.jobs section {
+    margin-bottom: 20px;
+}
+
+.jobs h2 {
+    font-size: 24px;
+    color: #1e73be;
+    margin-bottom: 10px;
+}
+
+.jobs ul {
+    list-style: none;
+    padding: 0;
+}
+
+.jobs ul li {
+    background-color: #f9f9f9;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+.jobs ul li h3 {
+    font-size: 20px;
+    margin: 0 0 5px 0;
+    color: #333;
+}
+
+.jobs ul li p {
+    margin: 5px 0;
+    color: #555;
+}
