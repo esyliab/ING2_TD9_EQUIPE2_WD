@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    background-color: #f3f3f3;
+    padding: 10px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e73be;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header img {
+    height: 50px;
+}
+
+.navigation {
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.navigation a {
+    background-color: #f0f8ff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #1e73be;
+    text-align: center;
+    text-decoration: none;
+    flex: 1;
+    margin: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation a:hover {
+    background-color: #d0e8ff;
+}
+
+.navigation a.active {
+    background-color: #1e73be;
+    color: white;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+}
+
+.profile-info {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    border: 1px solid #ddd;
+    padding: 10px;
+    color: #1e73be;
+}
+
+.add-entry,
+.generate-cv {
+    border: 1px solid #ddd;
+    padding: 10px;
+    color: #1e73be;
+}
+
+#cvOutput {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    color: #1e73be;
+}
+
+.column img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 75%; 
+}
