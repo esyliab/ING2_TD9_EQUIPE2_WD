@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre Profil | ECE In</title>
+    <link rel="stylesheet" href="vous.css">
+    <script src="vous.js" defer></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div>ECE In: Social Media Professionnel de l’ECE Paris</div>
+            <img src="logo.png" alt="ECE In Logo">
+        </div>
+        <div class="navigation">
+            <a href="accueil.html">Accueil</a>
+            <a href="mon_reseau.html">Mon Réseau</a>
+            <a href="vous.html" class="active">Vous</a>
+            <a href="notifications.html">Notifications</a>
+            <a href="messagerie.html">Messagerie</a>
+            <a href="emplois.html">Emplois</a>
+        </div>
+        <div class="profile-grid">
+            <div class="profile-info">
+                <h2>Photo de profil</h2>
+                <p id="pseudoPlaceholder"></p>
+                <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                <button onclick="document.getElementById('fileInput').click();">Choisir une photo</button>
+                <div id="entryList">
+                    <h3>Formations et Projets</h3>
+                </div>
+            </div>
+            <div class="add-entry">
+                <h2>Ajout de Formations et Projets</h2>
+                <form id="profileForm">
+                    <label for="type">Type :</label><br>
+                    <select id="type" name="type" required><br>
+                        <option value="formation">Formation</option><br>
+                        <option value="projet">Projet</option><br>
+                    </select><br>
+
+                    <label for="description">Description :</label><br>
+                    <textarea id="description" name="description" rows="4" cols="50" placeholder="Décrivez votre formation ou projet..." required></textarea><br>
+
+                    <label for="date">Date :</label><br>
+                    <input type="date" id="date" name="date" required><br><br>
+
+                    <button type="button" onclick="addEntry()">Ajouter</button>
+                </form>
+            </div>
+            <div class="generate-cv">
+                <h2>Création du CV</h2>
+                <button onclick="generateCV()">Générer mon CV</button>
+                <div id="cvOutput" style="display:none;">
+                    <h2>Mon CV</h2>
+                    <div id="cvContent"></div>
+                    <button onclick="downloadPDF()">Télécharger en PDF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Le reste du contenu de la page -->
+
+    <script>
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            const pseudo = params.get('pseudo');
+            if (pseudo) {
+                // Afficher le pseudo où vous voulez sur la page
+                document.getElementById('pseudoPlaceholder').innerText = "Pseudo : " + pseudo;
+            }
+        }
+
+        function displaySelectedImage(event) {
+            const selectedFile = event.target.files[0];
+            const profileImage = document.getElementById('profileImage');
+            profileImage.onload = function() {
+                URL.revokeObjectURL(profileImage.src); // Révoque l'URL pour libérer la mémoire
+            }
+            profileImage.src = URL.createObjectURL(selectedFile);
+        }
+    </script>
+</body>
+</html>
