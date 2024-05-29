@@ -28,6 +28,7 @@
         <h2>
             <i>Groupe BPCE · Paris, Île-de-France, France · il y a 2 semaines · 24 candidats</i>
         </h2>
+        <button onclick="toggleFavorite(this)" class="favorite-button">⭐</button>
          <h3> À propos de l’offre d’emploi
             Description de l'entreprise
 
@@ -65,5 +66,50 @@
         </h3>   
         </p>
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                loadFavorites();
+            });
+    
+            function toggleFavorite(button) {
+                const jobElement = button.parentElement;
+                const jobTitle = jobElement.querySelector('h1').innerText;
+                const isFavorite = jobElement.classList.toggle('favorite');
+    
+                button.classList.toggle('active', isFavorite);
+    
+                if (isFavorite) {
+                    saveFavorite(jobTitle);
+                } else {
+                    removeFavorite(jobTitle);
+                }
+            }
+    
+            function saveFavorite(jobTitle) {
+                let favorites = JSON.parse(localStorage.getItem('jobFavorites')) || [];
+                favorites.push(jobTitle);
+                localStorage.setItem('jobFavorites', JSON.stringify(favorites));
+            }
+    
+            function removeFavorite(jobTitle) {
+                let favorites = JSON.parse(localStorage.getItem('jobFavorites')) || [];
+                favorites = favorites.filter(item => item !== jobTitle);
+                localStorage.setItem('jobFavorites', JSON.stringify(favorites));
+            }
+    
+            function loadFavorites() {
+                const favorites = JSON.parse(localStorage.getItem('jobFavorites')) || [];
+                const jobElements = document.querySelectorAll('.jobs');
+    
+                jobElements.forEach(jobElement => {
+                    const jobTitle = jobElement.querySelector('h1').innerText;
+                    const button = jobElement.querySelector('.favorite-button');
+                    if (favorites.includes(jobTitle)) {
+                        jobElement.classList.add('favorite');
+                        button.classList.add('active');
+                    }
+                });
+            }
+        </script>
 </body>
 </html>

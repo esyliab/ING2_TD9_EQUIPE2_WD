@@ -28,6 +28,7 @@
         <h2>
             <i>OECD-OCDE · Ville de Paris, Île-de-France, France · il y a 6 jours · 31 candidats</i>
         </h2>
+        <button onclick="toggleFavorite(this)" class="favorite-button">⭐</button>
          <h3> À propos de l’offre d’emploi
             Within the Communications Directorate, the mission of the Digital Communications, Web and Publications division is to drive the development of communications plans, design and deliver cutting-edge digital communication and outreach products and services, including the OECD website, data visualization, videos and others. The division will serve both corporate priorities and Directorates needs for their communications to specialised audiences through a competitive portfolio of communications products and services.
 Specifically, the division will work with communicators across the Organisation (ONE communications function) to:
@@ -148,5 +149,50 @@ The OECD promotes an optimal use of resources in order to improve its efficiency
     </h3>   
     </p>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFavorites();
+        });
+
+        function toggleFavorite(button) {
+            const jobElement = button.parentElement;
+            const jobTitle = jobElement.querySelector('h1').innerText;
+            const isFavorite = jobElement.classList.toggle('favorite');
+
+            button.classList.toggle('active', isFavorite);
+
+            if (isFavorite) {
+                saveFavorite(jobTitle);
+            } else {
+                removeFavorite(jobTitle);
+            }
+        }
+
+        function saveFavorite(jobTitle) {
+            let favorites = JSON.parse(localStorage.getItem('jobFavorites')) || [];
+            favorites.push(jobTitle);
+            localStorage.setItem('jobFavorites', JSON.stringify(favorites));
+        }
+
+        function removeFavorite(jobTitle) {
+            let favorites = JSON.parse(localStorage.getItem('jobFavorites')) || [];
+            favorites = favorites.filter(item => item !== jobTitle);
+            localStorage.setItem('jobFavorites', JSON.stringify(favorites));
+        }
+
+        function loadFavorites() {
+            const favorites = JSON.parse(localStorage.getItem('jobFavorites')) || [];
+            const jobElements = document.querySelectorAll('.jobs');
+
+            jobElements.forEach(jobElement => {
+                const jobTitle = jobElement.querySelector('h1').innerText;
+                const button = jobElement.querySelector('.favorite-button');
+                if (favorites.includes(jobTitle)) {
+                    jobElement.classList.add('favorite');
+                    button.classList.add('active');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
