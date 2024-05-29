@@ -1,34 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Réseau</title>
+    <title>Mon Réseau | ECE In</title>
+    <link rel="stylesheet" href="accueil.css">
     <link rel="stylesheet" href="reseaux.css">
+    <link rel="icon" type="image/vnd.icon" href="ECE_LOGO_2021_web.ico">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="mon_reseau.html" class="active">Mon Réseau</a></li>
-                <li><a href="vous.html">Vous</a></li>
-                <li><a href="notifications.html">Notifications</a></li>
-                <li><a href="messagerie.html">Messagerie</a></li>
-                <li><a href="emplois.html">Emplois</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section id="network">
+    <div class="wrapper">
+        <div class="header">
+            <div>ECE In: Social Media Professionnel de l’ECE Paris</div>
+            <img src="ECE_LOGO_2021_web.png" alt="ECE In Logo">
+        </div>
+        <div class="navigation">
+            <a href="accueil.html">Accueil</a>
+            <a href="mon_reseau.html" class="active">Mon Réseau</a>
+            <a href="vous.html">Vous</a>
+            <a href="notifications.html">Notifications</a>
+            <a href="messagerie.html">Messagerie</a>
+            <a href="emplois.html">Emplois</a>
+        </div>
+        <div class="section">
             <h1>Mon Réseau</h1>
             <div id="connections-list">
                 <!-- Connection cards will be inserted here by JavaScript -->
             </div>
-        </section>
-    </main>
-
+        </div>
+        <div class="footer">
+            <p>Nous contacter :</p>
+            <p>Email : <a href="mailto:admissions-paris@ece.fr">admissions-paris@ece.fr</a></p>
+            <p>Téléphone : <a href="tel:0123456789">01.44.39.06.00</a></p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5250.73258943166!2d2.2859909763052793!3d48.85122517133121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2sECE%20-%20Ecole%20d&#39;ing%C3%A9nieurs%20-%20Campus%20de%20Paris!5e0!3m2!1sfr!2sfr!4v1716882068768!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
     <script src="reseaux.js"></script>
 </body>
 </html>

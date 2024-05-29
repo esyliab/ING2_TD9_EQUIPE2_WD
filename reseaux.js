@@ -1,4 +1,4 @@
-// scripts.js
+// reseaux.js
 
 document.addEventListener('DOMContentLoaded', () => {
     const connectionsList = document.getElementById('connections-list');
