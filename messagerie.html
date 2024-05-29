@@ -1,0 +1,77 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messagerie</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #messages {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .message.sent {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Messagerie</h1>
+        <div id="messages" class="border p-3 mb-3">
+            <!-- Messages will be loaded here -->
+        </div>
+        <form id="messageForm">
+            <div class="input-group mb-3">
+                <input type="hidden" id="sender_id" value="1"> <!-- Example sender -->
+                <input type="hidden" id="receiver_id" value="2"> <!-- Example receiver -->
+                <input type="text" id="content" class="form-control" placeholder="Type your message" required>
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </form>
+        <button id="teamsButton" class="btn btn-secondary">Rejoindre par Teams</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function loadMessages() {
+            const sender_id = $('#sender_id').val();
+            const receiver_id = $('#receiver_id').val();
+            $.get('messages.php', { sender_id, receiver_id }, function(data) {
+                const messages = JSON.parse(data);
+                $('#messages').empty();
+                messages.forEach(message => {
+                    const messageClass = message.sender_id == sender_id ? 'sent' : 'received';
+                    $('#messages').append(`<div class="message ${messageClass}">${message.content} <small>${message.timestamp}</small></div>`);
+                });
+            });
+        }
+
+        $('#messageForm').on('submit', function(e) {
+            e.preventDefault();
+            const sender_id = $('#sender_id').val();
+            const receiver_id = $('#receiver_id').val();
+            const content = $('#content').val();
+            $.post('messages.php', { sender_id, receiver_id, content }, function(data) {
+                const response = JSON.parse(data);
+                if (response.status === 'Message sent successfully') {
+                    $('#content').val('');
+                    loadMessages();
+                }
+            });
+        });
+
+        loadMessages();
+        setInterval(loadMessages, 5000); // Refresh messages every 5 seconds
+
+        $('#teamsButton').on('click', function() {
+            window.open('https://teams.microsoft.com/l/meetup-join/19%3ameeting_OTY3YzRmODMtMTYyNS00MGI2LTgxMjAtMmI4NzRjNTQzNjEw%40thread.v2/0?context=%7b%22Tid%22%3a%22a2697119-66c5-4126-9991-b0a8d15d367f%22%2c%22Oid%22%3a%2227972e9c-97cd-4f79-9bd1-2614a4b9c092%22%7d', '_blank');
+        });
+    </script>
+</body>
+</html>
