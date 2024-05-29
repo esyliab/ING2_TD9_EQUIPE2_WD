@@ -90,6 +90,8 @@
             const jobTitle = jobElement.querySelector('h1').innerText;
             const isFavorite = jobElement.classList.toggle('favorite');
 
+            button.classList.toggle('active', isFavorite);
+
             if (isFavorite) {
                 saveFavorite(jobTitle);
             } else {
@@ -115,8 +117,10 @@
 
             jobElements.forEach(jobElement => {
                 const jobTitle = jobElement.querySelector('h1').innerText;
+                const button = jobElement.querySelector('.favorite-button');
                 if (favorites.includes(jobTitle)) {
                     jobElement.classList.add('favorite');
+                    button.classList.add('active');
                 }
             });
         }
