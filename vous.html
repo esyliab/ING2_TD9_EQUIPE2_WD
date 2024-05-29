@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Votre Profil | ECE In</title>
     <link rel="stylesheet" href="vous.css">
-    <script src="vous.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <link rel="icon" type="image/vnd.icon" href="ECE_LOGO_2021_web.ico">
-
 </head>
 <body>
     <div class="wrapper">
@@ -30,7 +29,10 @@
                 <input type="file" id="fileInput" accept="image/*" style="display: none;">
                 <button onclick="document.getElementById('fileInput').click();">Choisir une photo</button>
                 <div id="entryList">
-                    <h3>Formations et Projets</h3>
+                    <h3>Formations</h3>
+                    <ul id="formationList"></ul>
+                    <h3>Projets</h3>
+                    <ul id="projetList"></ul>
                 </div>
             </div>
             <div class="add-entry">
@@ -53,7 +55,7 @@
             </div>
             <div class="generate-cv">
                 <h2>Création du CV</h2>
-                <button onclick="generateCV()">Générer mon CV</button>
+                <button onclick="loadEntriesFromXML()">Générer mon CV</button>
                 <div id="cvOutput" style="display:none;">
                     <h2>Mon CV</h2>
                     <div id="cvContent"></div>
@@ -62,7 +64,6 @@
             </div>
         </div>
     </div>
-
 
     <script>
         window.onload = function() {
@@ -80,6 +81,53 @@
                 URL.revokeObjectURL(profileImage.src); 
             }
             profileImage.src = URL.createObjectURL(selectedFile);
+        }
+
+        function addEntry() {
+            // Logic to add entries
+        }
+
+        function loadEntriesFromXML() {
+            fetch('data.xml')
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(data, "text/xml");
+
+                    const formations = [...xmlDoc.getElementsByTagName('formation')];
+                    const projets = [...xmlDoc.getElementsByTagName('projet')];
+
+                    const formationList = document.getElementById('formationList');
+                    const projetList = document.getElementById('projetList');
+
+                    formations.sort((a, b) => new Date(b.getElementsByTagName('date')[0].textContent) - new Date(a.getElementsByTagName('date')[0].textContent));
+                    projets.sort((a, b) => new Date(b.getElementsByTagName('date')[0].textContent) - new Date(a.getElementsByTagName('date')[0].textContent));
+
+                    formationList.innerHTML = ''; // Clear existing list
+                    projetList.innerHTML = ''; // Clear existing list
+
+                    formations.forEach(formation => {
+                        const li = document.createElement('li');
+                        li.textContent = `${formation.getElementsByTagName('date')[0].textContent}: ${formation.getElementsByTagName('description')[0].textContent}`;
+                        formationList.appendChild(li);
+                    });
+
+                    projets.forEach(projet => {
+                        const li = document.createElement('li');
+                        li.textContent = `${projet.getElementsByTagName('date')[0].textContent}: ${projet.getElementsByTagName('description')[0].textContent}`;
+                        projetList.appendChild(li);
+                    });
+
+                    document.getElementById('cvOutput').style.display = 'block'; // Show CV output
+                });
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.text(document.getElementById('cvContent').innerText, 10, 10);
+            doc.save('CV.pdf');
         }
     </script>
 </body>
