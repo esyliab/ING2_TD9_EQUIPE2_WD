@@ -21,6 +21,142 @@
             <a href="messagerie.html">Messagerie</a>
             <a href="emplois.html" class="active">Emplois</a>
         </div>
-	<p> OUI sdlkjqsdlj</p>
+        <div class="jobs">
+        <h1> 
+            <strong>Ingénieur d'affaires IT (H/F)</strong>
+        </h1>
+        <h2>
+            <i>Meritis · Ville de Paris, Île-de-France, France · Republiée il y a 2 semaines · Plus de 100 candidats</i>
+        </h2>
+        <button onclick="toggleFavorite(this)" class="favorite-button">⭐</button>
+         <h3> À propos de l’offre d’emploi
+            À propos de l’offre d’emploi
+Nous sommes à la recherche d'un Ingénieur d'Affaires pour intégrer notre BU Meritis Technologies. Vous rejoignez une équipe, jeune et dynamique, composée de 10 commerciaux et 5 recruteurs. L'ambiance de travail est joviale, solidaire et bienveillante!
+
+
+En tant qu'ingénieur d'affaires, votre objectif est de faire évoluer le portefeuille client de la BU Meritis Technologies et partir à la recherche de nouveaux clients, ouvrir de nouveaux comptes. Pour cela, vous aurez pour tâches :
+
+
+Business Development
+
+
+
+Prospection téléphonique et rendez-vous clients (présence terrain importante).
+Identification de nouveaux clients
+Recueil et analyse des besoins clients
+Construction des réponses aux Appels d’Offres
+
+
+Négociation commerciale et salariale
+
+
+
+Votre succès passe en partie par la réussite de nombreuses négociations qui marquent votre quotidien.
+Négociation commerciale : Négociation avec les achats client, date de démarrage, TJM
+Négociation salariale : Rémunération du consultant, gestion de l’inter-projet…
+
+
+Recrutement des futurs consultants
+
+
+
+En collaboration étroite avec l’équipe de recruteurs, vous participez au recrutement des futurs consultants.
+Evaluation technique et fonctionnelle des candidats
+Choix du type de recrutement proposé au candidat
+Organisation et participation aux entretiens clients
+
+
+Management des consultants de votre périmètre
+
+
+
+Votre réussite repose sur une gestion proactive des missions de vos consultants.
+Gestion de l’inter-projet de vos consultants en suivi
+Suivi régulier des consultants (au minimum une rencontre mensuelle)
+Organisation des points de missions trimestriels avec le client et le consultant
+Gestion des situations complexes
+
+
+Profil recherché
+
+
+
+Titulaire d’un Bac +5 d'une école d’ingénieur et/ou école de commerce ou équivalent
+Vous disposez de minimum 3 ans d'expériences en tant qu'ingénieur d'affaires ou sur des fonctions commerciales 
+Vous avez l’état d’esprit d’un entrepreneur : votre ambition est d’être capable de développer et de piloter un business from scratch.
+Vous êtes dynamique, tenace, investi et possédez une intelligence relationnelle.
+
+
+A propos de nous
+
+
+
+Meritis est un cabinet de conseil, pilotage et développement IT fondé en 2007 présent à Paris, Sophia-Antipolis, Aix-en-Provence, Montpellier, Toulouse, Nantes... Et bientôt sur de nouveaux territoires ! Notre mission ? Connecter les meilleurs talents aux entreprises pour leur donner un temps d’avance.
+
+
+Nous accompagnons nos clients dans l’intégralité de leurs besoins en transformation numérique à travers de nombreux domaines d’expertises : Software Engineering, Finance, Pilotage de projets, Devops, Data, Cloud, Cybersécurité ou encore Agilité.
+
+
+Intervenant aussi bien dans les secteurs de la Banque, de l'Assurance, des Télécommunications que de l'Industrie ou des Transports, aujourd'hui 40% des entreprises du CAC40 sont clientes Meritis.
+
+
+Fort de nos valeurs d’exigence, d’humilité, de bienveillance et de proximité, nous comptons aujourd’hui plus de 900 collaborateurs.
+
+
+Nous mettons un point d’honneur à être proche de nos collaborateurs et à les accompagner de manière individualisée quelles que soient leurs fonctions dans l’entreprise. Certifiée Great Place To Work depuis 2013, notre conception du bien-être au travail va bien au-delà d'un simple label, ce sont nos collaborateurs qui en parlent le mieux : https://www.glassdoor.fr/Avis/Meritis-Avis-E1163008.htm.
+ 
+Meritis est engagée dans la Responsabilité Sociétale des Entreprises. Nous valorisons notre impact positif sur la société et l'environnement. Notre démarche RSE guide chacune de nos actions pour promouvoir l'équité, la durabilité et le bien-être de nos collaborateurs. Rejoignez-nous pour être partie prenante de cette démarche responsable, où chacun de nos talents contribue à construire un avenir meilleur.
+
+Nos différences sont nos atouts. C’est pourquoi Meritis s'implique en faveur de la diversité et de la non-discrimination. Tous nos métiers sont accessibles aux personnes en situation de handicap
+
+Nous sommes à votre écoute. Vous pouvez contacter ethiquegroup@meritis.fr si vous pensez être victime ou témoin d’une discrimination
+        </h3>   
+        </p>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                loadFavorites();
+            });
+    
+            function toggleFavorite(button) {
+                const jobElement = button.parentElement;
+                const jobTitle = jobElement.querySelector('h1').innerText;
+                const isFavorite = jobElement.classList.toggle('favorite');
+    
+                button.classList.toggle('active', isFavorite);
+    
+                if (isFavorite) {
+                    saveFavorite(jobTitle);
+                } else {
+                    removeFavorite(jobTitle);
+                }
+            }
+    
+            function saveFavorite(jobTitle) {
+                let favorites = JSON.parse(localStorage.getItem('jobFavorites')) || [];
+                favorites.push(jobTitle);
+                localStorage.setItem('jobFavorites', JSON.stringify(favorites));
+            }
+    
+            function removeFavorite(jobTitle) {
+                let favorites = JSON.parse(localStorage.getItem('jobFavorites')) || [];
+                favorites = favorites.filter(item => item !== jobTitle);
+                localStorage.setItem('jobFavorites', JSON.stringify(favorites));
+            }
+    
+            function loadFavorites() {
+                const favorites = JSON.parse(localStorage.getItem('jobFavorites')) || [];
+                const jobElements = document.querySelectorAll('.jobs');
+    
+                jobElements.forEach(jobElement => {
+                    const jobTitle = jobElement.querySelector('h1').innerText;
+                    const button = jobElement.querySelector('.favorite-button');
+                    if (favorites.includes(jobTitle)) {
+                        jobElement.classList.add('favorite');
+                        button.classList.add('active');
+                    }
+                });
+            }
+        </script>
 </body>
 </html>

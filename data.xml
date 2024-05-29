@@ -1,0 +1,22 @@
+<data>
+    <formations>
+        <formation>
+            <date>2023-05-01</date>
+            <description>Master en Informatique</description>
+        </formation>
+        <formation>
+            <date>2021-07-01</date>
+            <description>Licence en Informatique</description>
+        </formation>
+    </formations>
+    <projets>
+        <projet>
+            <date>2023-04-01</date>
+            <description>Projet de Fin d'Études</description>
+        </projet>
+        <projet>
+            <date>2022-01-01</date>
+            <description>Projet Erasmus en Allemagne</description>
+        </projet>
+    </projets>
+</data>
