@@ -1,3 +1,4 @@
+/* reseaux.css */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -71,4 +72,22 @@ body {
     text-align: center;
     font-size: 16px;
     color: #1e73be;
+}
+
+#connections-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.connection-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 1rem;
+    width: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
