@@ -55,7 +55,7 @@
             </div>
             <div class="generate-cv">
                 <h2>Création du CV</h2>
-                <button onclick="generateCV()">Générer mon CV</button>
+                <button onclick="loadEntriesFromXML()">Générer mon CV</button>
                 <div id="cvOutput" style="display:none;">
                     <h2>Mon CV</h2>
                     <div id="cvContent"></div>
@@ -72,7 +72,6 @@
             if (pseudo) {
                 document.getElementById('pseudoPlaceholder').innerText = "Pseudo : " + pseudo;
             }
-            loadEntriesFromXML();
         }
 
         function displaySelectedImage(event) {
@@ -104,6 +103,9 @@
                     formations.sort((a, b) => new Date(b.getElementsByTagName('date')[0].textContent) - new Date(a.getElementsByTagName('date')[0].textContent));
                     projets.sort((a, b) => new Date(b.getElementsByTagName('date')[0].textContent) - new Date(a.getElementsByTagName('date')[0].textContent));
 
+                    formationList.innerHTML = ''; // Clear existing list
+                    projetList.innerHTML = ''; // Clear existing list
+
                     formations.forEach(formation => {
                         const li = document.createElement('li');
                         li.textContent = `${formation.getElementsByTagName('date')[0].textContent}: ${formation.getElementsByTagName('description')[0].textContent}`;
@@ -115,22 +117,9 @@
                         li.textContent = `${projet.getElementsByTagName('date')[0].textContent}: ${projet.getElementsByTagName('description')[0].textContent}`;
                         projetList.appendChild(li);
                     });
+
+                    document.getElementById('cvOutput').style.display = 'block'; // Show CV output
                 });
-        }
-
-        function generateCV() {
-            const cvContent = document.getElementById('cvContent');
-            cvContent.innerHTML = '';
-
-            const formations = document.getElementById('formationList').innerHTML;
-            const projets = document.getElementById('projetList').innerHTML;
-
-            cvContent.innerHTML += '<h3>Formations</h3>';
-            cvContent.innerHTML += formations;
-            cvContent.innerHTML += '<h3>Projets</h3>';
-            cvContent.innerHTML += projets;
-
-            document.getElementById('cvOutput').style.display = 'block';
         }
 
         function downloadPDF() {
