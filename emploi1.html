@@ -21,6 +21,8 @@
             <a href="messagerie.html">Messagerie</a>
             <a href="emplois.html" class="active">Emplois</a>
         </div>
+
+        
 	<p> 
     <div class="jobs">    
     <h1> 
@@ -29,6 +31,7 @@
     <h2>
         <i>Apprentus · Paris, Île-de-France, France · il y a 3 mois · 49 candidats</i>
     </h2>
+    <button onclick="toggleFavorite(this)" class="favorite-button">⭐</button>
      <h3> À propos de l’offre d’emploi
         Apprentus répond aux besoins quotidiens de tous ceux qui ont besoin de soutien scolaire, veulent s’initier à une nouvelle activité ou développer leurs compétences à l’aide de cours de langue, musique, sport, mathématiques, physique, etc.).
         
@@ -77,5 +80,46 @@
         Créez gratuitement votre profil en ligne en mentionnant vos disponibilités. Fixer librement le prix de vos cours selon vos compétences.</h3>   
     </p>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFavorites();
+        });
+
+        function toggleFavorite(button) {
+            const jobElement = button.parentElement;
+            const jobTitle = jobElement.querySelector('h1').innerText;
+            const isFavorite = jobElement.classList.toggle('favorite');
+
+            if (isFavorite) {
+                saveFavorite(jobTitle);
+            } else {
+                removeFavorite(jobTitle);
+            }
+        }
+
+        function saveFavorite(jobTitle) {
+            let favorites = JSON.parse(localStorage.getItem('jobFavorites')) || [];
+            favorites.push(jobTitle);
+            localStorage.setItem('jobFavorites', JSON.stringify(favorites));
+        }
+
+        function removeFavorite(jobTitle) {
+            let favorites = JSON.parse(localStorage.getItem('jobFavorites')) || [];
+            favorites = favorites.filter(item => item !== jobTitle);
+            localStorage.setItem('jobFavorites', JSON.stringify(favorites));
+        }
+
+        function loadFavorites() {
+            const favorites = JSON.parse(localStorage.getItem('jobFavorites')) || [];
+            const jobElements = document.querySelectorAll('.jobs');
+
+            jobElements.forEach(jobElement => {
+                const jobTitle = jobElement.querySelector('h1').innerText;
+                if (favorites.includes(jobTitle)) {
+                    jobElement.classList.add('favorite');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
