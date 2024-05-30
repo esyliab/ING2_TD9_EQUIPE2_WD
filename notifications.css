@@ -1,4 +1,4 @@
-/* reseaux.css */
+/* notifications.css */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -72,42 +72,4 @@ body {
     text-align: center;
     font-size: 16px;
     color: #1e73be;
-}
-
-.search-bar {
-    margin: 20px 0;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-#search-results, #connections-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.connection-card, .search-result-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 1rem;
-    width: 200px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.search-result-card button {
-    background-color: #1e73be;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.search-result-card button:hover {
-    background-color: #155a9a;
 }
