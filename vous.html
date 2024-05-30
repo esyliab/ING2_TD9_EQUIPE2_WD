@@ -102,7 +102,7 @@
 
         function generateCV() {
             const xhr = new XMLHttpRequest();
-            xhr.open("GET", "cv_data.xml", true);
+            xhr.open("GET", "data.xml", true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     const xmlDoc = xhr.responseXML;
