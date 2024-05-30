@@ -1,6 +1,33 @@
 $(document).ready(function() {
     const connectionsList = $('#connections-list');
-    const userId = 1; // Replace with actual logged-in user ID
+    const userId = 1; // Remplacer par l'ID de l'utilisateur connecté
+
+    // Fonction pour envoyer une demande d'ami
+    window.sendFriendRequest = function(receiverId) {
+        $.ajax({
+            url: 'add_friend.php',
+            method: 'POST',
+            data: { sender_id: userId, receiver_id: receiverId },
+            success: function(response) {
+                if (response.success) {
+                    $(`#friend-btn-${receiverId}`).prop('disabled', true).text('Demande envoyée');
+                    $(`#search-friend-btn-${receiverId}`).prop('disabled', true).text('Demande envoyée');
+
+                    // Ajouter une notification pour l'utilisateur destinataire
+                    $.ajax({
+                        url: 'add_notification.php',
+                        method: 'POST',
+                        data: { user_id: receiverId, message: 'Vous avez reçu une demande d\'ami.' },
+                        success: function(response) {
+                            // Gérer la réponse si nécessaire
+                        }
+                    });
+                } else {
+                    alert('Erreur lors de l\'envoi de la demande.');
+                }
+            }
+        });
+    };
 
     // Fetch and display users
     $.ajax({
@@ -60,21 +87,4 @@ $(document).ready(function() {
             }
         });
     });
-
-    // Send friend request function
-    window.sendFriendRequest = function(receiverId) {
-        $.ajax({
-            url: 'add_friend.php',
-            method: 'POST',
-            data: { sender_id: userId, receiver_id: receiverId },
-            success: function(response) {
-                if (response.success) {
-                    $(`#friend-btn-${receiverId}`).prop('disabled', true).text('Demande envoyée');
-                    $(`#search-friend-btn-${receiverId}`).prop('disabled', true).text('Demande envoyée');
-                } else {
-                    alert('Erreur lors de l\'envoi de la demande.');
-                }
-            }
-        });
-    };
 });
