@@ -1,3 +1,4 @@
+/* reseaux.css */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -57,72 +58,36 @@ body {
     color: white;
 }
 
-.jobs {
+.section {
     flex: 1;
     padding: 20px;
-}
-
-.jobs h1 {
     text-align: center;
-    font-size: 35px;
-    color: #1e73be;
-    margin-bottom: 20px;
-}
-
-.jobs h3 {
-    
-    font-size: 10px;
-    color: #1e73be;
-    margin-bottom: 20px;
-}
-
-
-.jobs section {
-    margin-bottom: 20px;
-}
-
-.jobs h2 {
     font-size: 24px;
     color: #1e73be;
-    margin-bottom: 10px;
 }
 
-.jobs ul {
-    list-style: none;
-    padding: 0;
-}
-
-.jobs ul li {
-    background-color: #f9f9f9;
-    margin: 10px 0;
+.footer {
+    background-color: #f3f3f3;
     padding: 10px;
-    border: 1px solid #e0e0e0;
+    text-align: center;
+    font-size: 16px;
+    color: #1e73be;
+}
+
+#connections-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.connection-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
     border-radius: 5px;
+    padding: 1rem;
+    width: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
-
-.jobs ul li h3 {
-    font-size: 20px;
-    margin: 0 0 5px 0;
-    color: #333;
-}
-
-.jobs ul li p {
-    margin: 5px 0;
-    color: #555;
-}
-.favorite-button {
-    background: white;
-    border: 1px solid gray;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.5rem;
-    color: gray;
-    padding: 5px 10px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.favorite-button.active {
-    background: yellow;
-    color: white;
-}
-

@@ -15,12 +15,123 @@
         </div>
         <div class="navigation">
             <a href="accueil.html">Accueil</a>
-            <a href="mon_reseau.html">Mon Reseau</a>
+            <a href="reseaux.html">Mon Reseau</a>
             <a href="vous.html">Vous</a>
             <a href="notifications.html">Notifications</a>
             <a href="messagerie.html">Messagerie</a>
             <a href="emplois.html" class="active">Emplois</a>
         </div>
-	<p> OUI I i </p>
+        <div class="jobs">
+        <h1> 
+            <strong>Chargé de Communication Direction de l'Enseignement H/F</strong>
+        </h1>
+        <h2>
+            <i>Institut Pasteur · Ville de Paris, Île-de-France, France · il y a 5 jours · 84 candidats</i>
+        </h2>
+        <button onclick="toggleFavorite(this)" class="favorite-button">⭐</button>
+         <h3> À propos de l’offre d’emploi
+            🔬 L'Institut Pasteur conduit des recherches biomédicales de pointe et avant-gardistes depuis plus de 130 ans. 
+            
+            Sur notre campus de 5 hectares en plein Paris (15è arrondissement), dans un environnement multiculturel et stimulant, 3000 personnes collaborent ensemble pour répondre aux ambitions de l'Institut Pasteur. 
+            
+             
+            Dans le cadre de diverses actualités de la Direction de l'Enseignement, nous recrutons un(e) Chargé(e) de Communication pour travailler en transversalité avec les différents pôles de cette direction.
+            CDD de 12 mois sur notre campus Paris 15è. Salaire 35/40kEUR.
+            
+            
+            📋 Vos missions :
+            
+            COORDINATIONS INTERNE
+             Coordonner les actions de communication de la Direction de l'Enseignement avec la Direction de la Communication pour les piliers thématiques " Science " et " Attractivité "
+             Représenter la Direction de l'Enseignement lors des réunions mensuelles avec la Direction de la Communication afin de définir les sujets pour la communication Grand Public
+             Être le référent pour le respect de la " charte Pasteur " dans toute activité de communication
+             Évaluer la possibilité de créer une vidéo institutionnelle sur le centre d'enseignement et sur la mission enseignement
+            
+            
+            COMMUNICATION EXTERNE et INTERNE
+            Site web:
+             o Revoir l'architecture des pages de la Direction de l'Enseignement, en harmoniser les contenus et suivi du projet de refonte du site Web de l'Institut Pasteur en appliquant les consignes de la Direction de la Communication et de la DSI
+             o Améliorer le référencement des pages web de la Direction de l'Enseignement
+            Solliciter régulièrement les contributeurs pour la mise à jour des contenus des pages web internes et externes
+            Intégrer les dimensions RSE et DEI dans les supports
+            Poster des " actualités " sur les pages web
+            Interfacer les pasteur.fr, research.pasteur.fr et MyPE (affichage des pages des cours et MOOCs Pasteur, webinaires de l'enseignement etc)
+            Définir une stratégie et assurer l'animation sur les réseaux sociaux
+            Organiser le compte YouTube de la Direction de l'Enseignement
+            Coordonner avec les pages web la mise à jour des supports papiers existants et développer avec les contributeurs des contenus des supports nouveaux
+            Maintenir à jour la communication sur les plateformes nationales (Campus France) et s'assurer des mises à jour sur les sites des partenaires (universités, CNAM, etc) pour l'offre de cours, les appels d'offres et autres évènements
+            Maintenir à jour la communication sur le site " Times Higher Education "
+            Développer un outil de gestion de newsletter (pour les MOOCs, webinaire et cours en présence ou autres informations)
+            Revoir et optimiser les canaux de communication
+            Coordonner ou participer à l'organisation d'évènements
+            Intranet e-Pasteur : harmoniser et retravailler les contenus, créer des pages 
+            
+            
+             📑 Profil 
+            
+            Vous êtes diplômé(e) d'un bac + 5 en communication et vous disposez de minimum 3 années d'expériences.
+            Excellente connaissance de l'anglais et du français écrit et parlé (niveau C2), et la connaissance de toute autre langue supplémentaire est bienvenue
+            Excellentes aptitudes à la communication
+            Capacité à innover dans la manière de communiquer sur les programmes éducatifs et les initiatives pédagogiques de l'Institut Pasteur, en explorant de nouvelles approches et technologies pour stimuler l'engagement et l'intérêt des apprenants
+            Forte capacité à produire des rapports écrits, oraux ou digitaux
+            Excellente capacité à travailler en équipe dans un environnement scientifique et en interaction avec des multiples interlocuteurs
+            Ouverture d'esprit
+            Être à l'aise pour travailler au sein d'une équipe pluridisciplinaire et internationale 
+            Excellentes capacités d'organisation en mode multitâche à l'aise dans un environnement multiculturel, avec un niveau élevé de transparence, une éthique de travail et une interaction étroite avec ses collègues
+            Capacité importante dans l'organisation du temps sur des fonctions multitâches
+            Gestion rigoureuse des dossiers, traçage et archivage
+            Maitrise parfaite des outils bureautiques et numériques (Word, Excel, Messagerie, PowerPoint, Outlook, ADOBE, pages web)
+            Savoir produire des indicateurs pour la direction et pour la gouvernance
+            La connaissance de l'environnement scientifique serait un plus
+             
+            Ref : 20865371
+        </h3>   
+        </p>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                loadFavorites();
+            });
+    
+            function toggleFavorite(button) {
+                const jobElement = button.parentElement;
+                const jobTitle = jobElement.querySelector('h1').innerText;
+                const isFavorite = jobElement.classList.toggle('favorite');
+    
+                button.classList.toggle('active', isFavorite);
+    
+                if (isFavorite) {
+                    saveFavorite(jobTitle);
+                } else {
+                    removeFavorite(jobTitle);
+                }
+            }
+    
+            function saveFavorite(jobTitle) {
+                let favorites = JSON.parse(localStorage.getItem('jobFavorites')) || [];
+                favorites.push(jobTitle);
+                localStorage.setItem('jobFavorites', JSON.stringify(favorites));
+            }
+    
+            function removeFavorite(jobTitle) {
+                let favorites = JSON.parse(localStorage.getItem('jobFavorites')) || [];
+                favorites = favorites.filter(item => item !== jobTitle);
+                localStorage.setItem('jobFavorites', JSON.stringify(favorites));
+            }
+    
+            function loadFavorites() {
+                const favorites = JSON.parse(localStorage.getItem('jobFavorites')) || [];
+                const jobElements = document.querySelectorAll('.jobs');
+    
+                jobElements.forEach(jobElement => {
+                    const jobTitle = jobElement.querySelector('h1').innerText;
+                    const button = jobElement.querySelector('.favorite-button');
+                    if (favorites.includes(jobTitle)) {
+                        jobElement.classList.add('favorite');
+                        button.classList.add('active');
+                    }
+                });
+            }
+        </script>  
 </body>
 </html>
