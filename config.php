@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$db = 'ecein';
+$db = 'ece_in';
 $user = 'root';
 $pass = '';
 
