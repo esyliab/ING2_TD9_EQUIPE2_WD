@@ -60,6 +60,10 @@
                     <div id="cvContent"></div>
                     <button onclick="downloadPDF()">Télécharger en PDF</button>
                 </div>
+                <button id="cvButton" onclick="showCV()">Afficher le CV</button>
+                <div id="cvDetails" style="display:none;">
+                    <!-- Le contenu du CV sera affiché ici -->
+                </div>
             </div>
         </div>
     </div>
@@ -124,6 +128,31 @@
 
         function downloadPDF() {
             // Logique pour télécharger le CV en PDF
+        }
+
+        function showCV() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "data.xml", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    const xmlDoc = xhr.responseXML;
+                    const formations = Array.from(xmlDoc.getElementsByTagName("formation")).map(formation => `
+                        <li><strong>${formation.getElementsByTagName("titre")[0].textContent}</strong>, ${formation.getElementsByTagName("etablissement")[0].textContent}, ${formation.getElementsByTagName("annee")[0].textContent}</li>
+                    `).join('');
+                    const projets = Array.from(xmlDoc.getElementsByTagName("projet")).map(projet => `
+                        <li><strong>${projet.getElementsByTagName("titre")[0].textContent}</strong>: ${projet.getElementsByTagName("description")[0].textContent} (${projet.getElementsByTagName("annee")[0].textContent})</li>
+                    `).join('');
+                    const cvDetailsContent = `
+                        <h2>Formations</h2>
+                        <ul>${formations}</ul>
+                        <h2>Projets</h2>
+                        <ul>${projets}</ul>
+                    `;
+                    document.getElementById('cvDetails').innerHTML = cvDetailsContent;
+                    document.getElementById('cvDetails').style.display = 'block';
+                }
+            };
+            xhr.send();
         }
     </script>
 </body>
