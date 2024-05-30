@@ -1,22 +1,22 @@
-<data>
-    <formations>
-        <formation>
-            <date>2023-05-01</date>
-            <description>Master en Informatique</description>
-        </formation>
-        <formation>
-            <date>2021-07-01</date>
-            <description>Licence en Informatique</description>
-        </formation>
-    </formations>
-    <projets>
-        <projet>
-            <date>2023-04-01</date>
-            <description>Projet de Fin d'Études</description>
-        </projet>
-        <projet>
-            <date>2022-01-01</date>
-            <description>Projet Erasmus en Allemagne</description>
-        </projet>
-    </projets>
-</data>
+<cv>
+    <formation>
+        <titre>Titre de la formation 1</titre>
+        <etablissement>Nom de l'établissement 1</etablissement>
+        <annee>Année de la formation 1</annee>
+    </formation>
+    <formation>
+        <titre>Titre de la formation 2</titre>
+        <etablissement>Nom de l'établissement 2</etablissement>
+        <annee>Année de la formation 2</annee>
+    </formation>
+    <projet>
+        <titre>Titre du projet 1</titre>
+        <description>Description du projet 1</description>
+        <annee>Année du projet 1</annee>
+    </projet>
+    <projet>
+        <titre>Titre du projet 2</titre>
+        <description>Description du projet 2</description>
+        <annee>Année du projet 2</annee>
+    </projet>
+</cv>

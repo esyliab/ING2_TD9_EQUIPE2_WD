@@ -131,11 +131,13 @@
         }
 
         function showCV() {
-            const xhr = new XMLHttpRequest();
-            xhr.open("GET", "data.xml", true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    const xmlDoc = xhr.responseXML;
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "data.xml", true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                const xmlDoc = xhr.responseXML;
+                if (xmlDoc) {
                     const formations = Array.from(xmlDoc.getElementsByTagName("formation")).map(formation => `
                         <li><strong>${formation.getElementsByTagName("titre")[0].textContent}</strong>, ${formation.getElementsByTagName("etablissement")[0].textContent}, ${formation.getElementsByTagName("annee")[0].textContent}</li>
                     `).join('');
@@ -150,10 +152,17 @@
                     `;
                     document.getElementById('cvDetails').innerHTML = cvDetailsContent;
                     document.getElementById('cvDetails').style.display = 'block';
+                } else {
+                    console.error("Erreur : Le fichier XML est vide ou mal formé.");
                 }
-            };
-            xhr.send();
+            } else {
+                console.error("Erreur lors du chargement du fichier XML : " + xhr.status);
+            }
         }
+    };
+    xhr.send();
+}
+
     </script>
 </body>
 </html>
