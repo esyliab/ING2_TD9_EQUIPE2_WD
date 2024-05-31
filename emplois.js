@@ -30,9 +30,17 @@ function showMessage(message) {
     // Ajouter le message au corps du document
     document.body.appendChild(messageDiv);
 
+    // Utiliser un timeout pour permettre l'animation
+    setTimeout(() => {
+        messageDiv.classList.add('show');
+    }, 10);
+
     // Supprimer le message après 3 secondes
     setTimeout(() => {
-        document.body.removeChild(messageDiv);
+        messageDiv.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(messageDiv);
+        }, 500); // Attendre la fin de l'animation de disparition
     }, 3000);
 }
 
