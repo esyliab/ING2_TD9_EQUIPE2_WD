@@ -1,22 +1,22 @@
 <cv>
     <formation>
-        <titre>Titre de la formation 1</titre>
-        <etablissement>Nom de l'établissement 1</etablissement>
-        <annee>Année de la formation 1</annee>
+        <titre>Ecole d'ingénieurs</titre>
+        <etablissement>ECE</etablissement>
+        <annee>2022-2027</annee>
     </formation>
     <formation>
-        <titre>Titre de la formation 2</titre>
-        <etablissement>Nom de l'établissement 2</etablissement>
-        <annee>Année de la formation 2</annee>
+        <titre>Cycle secondaire</titre>
+        <etablissement>Lycée Marie Curie</etablissement>
+        <annee>2018-2022</annee>
     </formation>
     <projet>
-        <titre>Titre du projet 1</titre>
-        <description>Description du projet 1</description>
-        <annee>Année du projet 1</annee>
+        <titre>Projet Piscine</titre>
+        <description>Création d'un site web à thèmes</description>
+        <annee>2024</annee>
     </projet>
     <projet>
-        <titre>Titre du projet 2</titre>
-        <description>Description du projet 2</description>
-        <annee>Année du projet 2</annee>
+        <titre>Gyrobot</titre>
+        <description>Robot doté d'un gyropode</description>
+        <annee>2024</annee>
     </projet>
 </cv>
