@@ -4,7 +4,10 @@
 // Start session
 session_start();
 
-include 'config.php';
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ECE_Social_Media";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -15,8 +18,8 @@ if ($conn->connect_error) {
 }
 
 // Get form data
-$email = $_POST['email'];
-$pseudo = $_POST['pseudo'];
+$email = isset($_POST['email']) ? $_POST['email'] : '';
+$pseudo = isset($_POST['username']) ? $_POST['username'] : '';
 
 // Prepare and bind
 $stmt = $conn->prepare("SELECT * FROM Users WHERE email = ? AND username = ?");
@@ -38,11 +41,13 @@ if ($result->num_rows > 0) {
     $_SESSION['email'] = $user['email'];
     $_SESSION['username'] = $user['username'];
     
-    // Redirect to homepage or dashboard
+    // Redirect to homepage
     header("Location: accueil.html");
+    exit(); // Assurez-vous d'arrêter l'exécution du script après la redirection
 } else {
     // User does not exist, redirect to login with error
     header("Location: login.html?error=invalid_credentials");
+    exit(); // Assurez-vous d'arrêter l'exécution du script après la redirection
 }
 
 // Close the statement and connection
