@@ -1,38 +1,55 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "ece_in_user";
+// login.php
 
-// Créer une connexion
+// Start session
+session_start();
+
+// Database connection details
+$servername = "localhost";
+$username = "root"; // Change this to your database username
+$password = ""; // Change this to your database password
+$dbname = "ECE_Social_Media";
+
+// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Vérifier la connexion
+// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Récupérer les données du formulaire
-$email = $conn->real_escape_string($_POST['email']);
-$pseudo = $conn->real_escape_string($_POST['pseudo']);
+// Get form data
+$email = $_POST['email'];
+$pseudo = $_POST['pseudo'];
 
-// Préparer et exécuter la requête SQL
-$sql = "SELECT * FROM users WHERE email='$email' AND pseudo='$pseudo'";
-$result = $conn->query($sql);
+// Prepare and bind
+$stmt = $conn->prepare("SELECT * FROM Users WHERE email = ? AND username = ?");
+$stmt->bind_param("ss", $email, $pseudo);
 
-if ($result === false) {
-    // Afficher l'erreur SQL pour le débogage
-    die("Error executing query: " . $conn->error);
-}
+// Execute the statement
+$stmt->execute();
 
+// Get the result
+$result = $stmt->get_result();
+
+// Check if user exists
 if ($result->num_rows > 0) {
-    // L'utilisateur existe, redirection vers la page d'accueil
+    // User exists
+    $user = $result->fetch_assoc();
+    
+    // Set session variables
+    $_SESSION['user_id'] = $user['user_id'];
+    $_SESSION['email'] = $user['email'];
+    $_SESSION['username'] = $user['username'];
+    
+    // Redirect to homepage or dashboard
     header("Location: accueil.html");
-    exit();
 } else {
-    // L'utilisateur n'existe pas, affichage d'un message d'erreur
-    echo "Email ou pseudo incorrect.";
+    // User does not exist, redirect to login with error
+    header("Location: login.html?error=invalid_credentials");
 }
 
+// Close the statement and connection
+$stmt->close();
 $conn->close();
 ?>
