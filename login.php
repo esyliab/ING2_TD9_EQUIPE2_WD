@@ -4,11 +4,7 @@
 // Start session
 session_start();
 
-// Database connection details
-$servername = "localhost";
-$username = "root"; // Change this to your database username
-$password = ""; // Change this to your database password
-$dbname = "ECE_Social_Media";
+include 'config.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
