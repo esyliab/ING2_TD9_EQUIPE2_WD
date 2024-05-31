@@ -18,7 +18,7 @@ document.getElementById('jobForm').addEventListener('submit', function(event) {
     document.getElementById('jobForm').reset();
 
     // Afficher un message de notification sur la page
-    showMessage(`Nouvelle offre d'emploi ajoutée : ${contractType}`);
+    showMessage(`Nouvelle offre d'emploi: ${contractType}`);
 });
 
 function showMessage(message) {
