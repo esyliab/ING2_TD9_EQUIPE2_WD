@@ -1,26 +1,90 @@
-// reseaux.js
+$(document).ready(function() {
+    const connectionsList = $('#connections-list');
+    const userId = 1; // Remplacer par l'ID de l'utilisateur connecté
 
-document.addEventListener('DOMContentLoaded', () => {
-    const connectionsList = document.getElementById('connections-list');
-    
-    const connections = [
-        { name: 'Alice Dupont', jobTitle: 'Software Engineer', profileImage: 'alice.jpg' },
-        { name: 'Bob Martin', jobTitle: 'Project Manager', profileImage: 'bob.jpg' },
-        { name: 'Claire Lebrun', jobTitle: 'UX Designer', profileImage: 'claire.jpg' }
-        // Add more connections as needed
-    ];
+    // Fonction pour envoyer une demande d'ami
+    window.sendFriendRequest = function(receiverId) {
+        $.ajax({
+            url: 'add_friend.php',
+            method: 'POST',
+            data: { sender_id: userId, receiver_id: receiverId },
+            success: function(response) {
+                if (response.success) {
+                    $(`#friend-btn-${receiverId}`).prop('disabled', true).text('Demande envoyée');
+                    $(`#search-friend-btn-${receiverId}`).prop('disabled', true).text('Demande envoyée');
 
-    connections.forEach(connection => {
-        const connectionCard = document.createElement('div');
-        connectionCard.classList.add('connection-card');
-        
-        connectionCard.innerHTML = `
-            <img src="${connection.profileImage}" alt="${connection.name}" style="width:100px;height:100px;border-radius:50%;">
-            <h3>${connection.name}</h3>
-            <p>${connection.jobTitle}</p>
-            <button class="message-btn">Message</button>
-        `;
+                    // Ajouter une notification pour l'utilisateur destinataire
+                    $.ajax({
+                        url: 'add_notification.php',
+                        method: 'POST',
+                        data: { user_id: receiverId, message: 'Vous avez reçu une demande d\'ami.' },
+                        success: function(response) {
+                            // Gérer la réponse si nécessaire
+                        }
+                    });
+                } else {
+                    alert('Erreur lors de l\'envoi de la demande.');
+                }
+            }
+        });
+    };
 
-        connectionsList.appendChild(connectionCard);
+    // Fetch and display users
+    $.ajax({
+        url: 'get_users.php',
+        method: 'GET',
+        success: function(users) {
+            const userProfiles = JSON.parse(users);
+            connectionsList.empty(); // Clear the list before appending new data
+            userProfiles.forEach(user => {
+                if (user.user_id !== userId) {
+                    const userCard = $(`
+                        <div class="user-card">
+                            <p>Pseudo: ${user.username}</p>
+                            <p>Email: ${user.email}</p>
+                            <button class="btn btn-primary" id="friend-btn-${user.user_id}" onclick="sendFriendRequest(${user.user_id})">Envoyer une demande d'ami</button>
+                        </div>
+                    `);
+                    connectionsList.append(userCard);
+                }
+            });
+        },
+        error: function() {
+            alert('Error fetching users');
+        }
+    });
+
+    // Search function
+    $('#search-btn').on('click', function() {
+        const keyword = $('#search-input').val();
+        $.ajax({
+            url: 'search.php',
+            method: 'GET',
+            data: { keyword },
+            success: function(users) {
+                const searchResults = $('#search-results');
+                searchResults.empty(); // Clear previous results
+                const userProfiles = JSON.parse(users);
+                if (userProfiles.length > 0) {
+                    userProfiles.forEach(user => {
+                        if (user.user_id !== userId) {
+                            const userCard = $(`
+                                <div class="search-result-card">
+                                    <p>Pseudo: ${user.username}</p>
+                                    <p>Email: ${user.email}</p>
+                                    <button class="btn btn-primary" id="search-friend-btn-${user.user_id}" onclick="sendFriendRequest(${user.user_id})">Envoyer une demande d'ami</button>
+                                </div>
+                            `);
+                            searchResults.append(userCard);
+                        }
+                    });
+                } else {
+                    searchResults.append('<p>Aucun utilisateur trouvé</p>');
+                }
+            },
+            error: function() {
+                alert('Error searching users');
+            }
+        });
     });
 });

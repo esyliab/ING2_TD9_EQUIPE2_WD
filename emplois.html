@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emplois | ECE In</title>
-    <link rel="icon" type="image/vnd.icon" href="C:\wamp64\www\ING2_TD9_EQUIPE2_WD\ECE_LOGO_2021_web.ico">
+    <link rel="icon" type="image/vnd.icon" href="ECE_LOGO_2021_web.ico">
     <link rel="stylesheet" href="emplois.css">
 </head>
 <body>
     <div class="wrapper">
         <div class="header">
             <div>ECE In: Social Media Professionnel de l’ECE Paris</div>
-            <img src="C:\wamp64\www\PROJET_v1\PROJET\ECE_LOGO_2021_web.png" alt="ECE In Logo">
+            <img src="ECE_LOGO_2021_web.png" alt="ECE In Logo">
         </div>
         <div class="navigation">
             <a href="accueil.html">Accueil</a>
@@ -21,65 +21,33 @@
             <a href="messagerie.html">Messagerie</a>
             <a href="emplois.html" class="active">Emplois</a>
         </div>
+    <div class="container">
+        <h1>Ajouter un emploi</h1>
+        <form id="jobForm">
+            <label for="jobTitle">Intitulé du métier :</label>
+            <input type="text" id="jobTitle" name="jobTitle" required>
 
-        <div class="jobs">
-            <h1>Emplois Disponibles</h1>
-            
-            <section id="emplois-ecole">
-                <h2>À l'École</h2>
-                <ul>
-                    <li>
-                        <a href="emploi1.html">Enseignant vacataire</a>
-                        <p>Type : Permanent</p>
-                        <p>Lieu : ECE Paris</p>
-                        <p>Rémunération : 50€/heure</p>
-                    </li>
-                    <li>
-                        <a href="emploi2.html">Stage en administration</a>
-                        <p>Type : Stage</p>
-                        <p>Lieu : ECE Paris</p>
-                        <p>Rémunération : 800€/mois</p>
-                    </li>
-                </ul>
-            </section>
-            
-            <section id="emplois-omnes">
-                <h2>À Omnes Education</h2>
-                <ul>
-                    <li>
-                        <a href="emploi3.html">Chargé de communication</a>
-                        <p>Type : Permanent</p>
-                        <p>Lieu : Omnes Education, Paris</p>
-                        <p>Rémunération : 35,000€/an</p>
-                    </li>
-                </ul>
-            </section>
-            
-            <section id="emplois-partenaires">
-                <h2>Chez les Partenaires</h2>
-                <ul>
-                    <li>
-                        <a href="emploi4.html">Développeur Web</a>
-                        <p>Type : CDD</p>
-                        <p>Lieu : Partenaire XYZ, Lyon</p>
-                        <p>Rémunération : 2,500€/mois</p>
-                    </li>
-                </ul>
-            </section>
-            
-            <section id="emplois-entreprises">
-                <h2>Dans les Entreprises en France ou dans l'UE</h2>
-                <ul>
-                    <li>
-                        <a href="emploi5.html">Consultant IT</a>
-                        <p>Type : CDI</p>
-                        <p>Lieu : Entreprise ABC, Berlin</p>
-                        <p>Rémunération : 60,000€/an</p>
-                    </li>
-                </ul>
-            </section>
-        </div>
+            <label for="contractType">Type de contrat :</label>
+            <select id="contractType" name="contractType" required>
+                <option value="CDD">CDD</option>
+                <option value="CDI">CDI</option>
+                <option value="Stage">Stage</option>
+                <option value="Alternance">Alternance</option>
+            </select>
+
+            <label for="salary">Salaire :</label>
+            <input type="number" id="salary" name="salary" required>
+
+            <label for="location">Localisation :</label>
+            <input type="text" id="location" name="location" required>
+
+            <button type="submit">Ajouter l'emploi</button>
+        </form>
+
+        <h2>Liste des emplois</h2>
+        <ul id="jobList"></ul>
     </div>
 
+    <script src="emplois.js"></script>
 </body>
 </html>
