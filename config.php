@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost'; 
-$db = 'ece_social_media';
+$db = 'ECE_Social_Media';
 $user = 'root'; 
 $pass = ''; 
 

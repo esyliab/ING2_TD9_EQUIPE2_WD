@@ -2,14 +2,13 @@ CREATE DATABASE ECE_Social_Media;
 
 USE ECE_Social_Media;
 
--- Users table
 CREATE TABLE Users (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    username VARCHAR(255) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    first_name VARCHAR(255),
-    last_name VARCHAR(255),
+    user_id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    username VARCHAR(15) NOT NULL UNIQUE,
+    password_hash VARCHAR(20) NOT NULL,
+    first_name VARCHAR(10),
+    last_name VARCHAR(20),
     profile_picture VARCHAR(255),
     background_image VARCHAR(255),
     bio TEXT,
@@ -18,7 +17,6 @@ CREATE TABLE Users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Posts table
 CREATE TABLE Posts (
     post_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
@@ -29,7 +27,6 @@ CREATE TABLE Posts (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
--- Events table
 CREATE TABLE Events (
     event_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
@@ -41,7 +38,6 @@ CREATE TABLE Events (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
--- Connections table (combine friends and friend requests)
 CREATE TABLE Connections (
     connection_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id1 INT,
@@ -52,7 +48,6 @@ CREATE TABLE Connections (
     FOREIGN KEY (user_id2) REFERENCES Users(user_id)
 );
 
--- Messages table
 CREATE TABLE Messages (
     message_id INT AUTO_INCREMENT PRIMARY KEY,
     sender_id INT,
@@ -63,7 +58,6 @@ CREATE TABLE Messages (
     FOREIGN KEY (receiver_id) REFERENCES Users(user_id)
 );
 
--- Notifications table
 CREATE TABLE Notifications (
     notification_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
@@ -73,7 +67,6 @@ CREATE TABLE Notifications (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
--- Jobs table
 CREATE TABLE Jobs (
     job_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -84,7 +77,6 @@ CREATE TABLE Jobs (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Comments table
 CREATE TABLE Comments (
     comment_id INT AUTO_INCREMENT PRIMARY KEY,
     post_id INT,
@@ -95,7 +87,6 @@ CREATE TABLE Comments (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
--- Reactions table
 CREATE TABLE Reactions (
     reaction_id INT AUTO_INCREMENT PRIMARY KEY,
     post_id INT,
@@ -106,8 +97,6 @@ CREATE TABLE Reactions (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
--- Ajouter des utilisateurs fictifs
--- Note: Le mot de passe devrait être haché avant insertion.
 INSERT INTO Users (username, email, profile_picture, password_hash)
 VALUES
 ('john_doe', 'john@example.com', 'path/to/profile1.jpg', 'hashed_password1'),

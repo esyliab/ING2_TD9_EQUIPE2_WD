@@ -1,29 +1,49 @@
-// Fonction pour créer une nouvelle offre
-function creerOffre() {
-    // Récupérer les données du formulaire
-    var titre = document.getElementById('titre').value;
-    var description = document.getElementById('description').value;
+document.getElementById('jobForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-    // Stocker les données dans le localStorage
-    localStorage.setItem('nouvelleOffre', JSON.stringify({ titre: titre, description: description }));
+    // Récupérer les valeurs des champs du formulaire
+    const jobTitle = document.getElementById('jobTitle').value;
+    const contractType = document.getElementById('contractType').value;
+    const salary = document.getElementById('salary').value;
+    const location = document.getElementById('location').value;
 
-    // Rediriger vers la page notifications
-    window.location.href = 'notifications.html';
+    // Créer un nouvel élément de liste pour afficher le job
+    const jobItem = document.createElement('li');
+    jobItem.textContent = `${jobTitle} - ${contractType} - ${salary}€ - ${location}`;
+
+    // Ajouter l'élément de liste à la liste des emplois
+    document.getElementById('jobList').appendChild(jobItem);
+
+    // Réinitialiser le formulaire
+    document.getElementById('jobForm').reset();
+
+    // Afficher un message de notification sur la page avec le type de contrat
+    showMessage(`Nouveau type de contrat ajouté: ${contractType}`);
+});
+
+function showMessage(message) {
+    // Créer un élément de div pour le message
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'notification';
+    messageDiv.textContent = message;
+
+    // Ajouter le message au corps du document
+    document.body.appendChild(messageDiv);
+
+    // Utiliser un timeout pour permettre l'animation
+    setTimeout(() => {
+        messageDiv.classList.add('show');
+    }, 10);
+
+    // Supprimer le message après 3 secondes
+    setTimeout(() => {
+        messageDiv.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(messageDiv);
+        }, 500); // Attendre la fin de l'animation de disparition
+    }, 3000);
 }
 
-// Vérifier s'il y a une nouvelle offre
-if (localStorage.getItem('nouvelleOffre')) {
-    var nouvelleOffre = JSON.parse(localStorage.getItem('nouvelleOffre'));
-
-    // Afficher la notification sur la page notifications
-    var notificationsList = document.getElementById('notificationsList');
-    var nouvelleNotification = document.createElement('li');
-    nouvelleNotification.textContent = 'Nouvelle offre : ' + nouvelleOffre.titre;
-    notificationsList.appendChild(nouvelleNotification);
-
-    // Supprimer l'offre du localStorage après affichage de la notification
-    localStorage.removeItem('nouvelleOffre');
-}
 // Fonction pour afficher les notifications
 function afficherNotifications() {
     // Vérifier s'il y a une nouvelle offre
@@ -43,30 +63,3 @@ function afficherNotifications() {
 
 // Appeler la fonction d'affichage des notifications périodiquement
 setInterval(afficherNotifications, 1000); // 1000ms = 1 seconde
-
-// Récupération du formulaire
-const jobForm = document.getElementById('jobForm');
-
-// Récupération de la liste des emplois
-const jobList = document.getElementById('jobList');
-
-// Écouteur d'événement pour le formulaire
-jobForm.addEventListener('submit', function(event) {
-    event.preventDefault(); // Pour empêcher la soumission du formulaire
-
-    // Récupération des valeurs du formulaire
-    const jobTitle = document.getElementById('jobTitle').value;
-    const contractType = document.getElementById('contractType').value;
-    const salary = document.getElementById('salary').value;
-    const location = document.getElementById('location').value;
-
-    // Création de l'élément li contenant les informations de l'offre d'emploi
-    const newJobItem = document.createElement('li');
-    newJobItem.textContent = `${jobTitle} - ${contractType} - Salaire: ${salary} - Localisation: ${location}`;
-
-    // Ajout de la nouvelle offre d'emploi à la liste
-    jobList.insertBefore(newJobItem, jobList.firstChild);
-
-    // Effacer les champs du formulaire après soumission
-    jobForm.reset();
-});

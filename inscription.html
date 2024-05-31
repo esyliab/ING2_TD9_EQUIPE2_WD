@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - ECE In</title>
+    <link rel="stylesheet" href="accueil.css">
+    <link rel="icon" type="image/vnd.icon" href="ECE_LOGO_2021_web.ico">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div>ECE In: Inscription</div>
+            <img src="ECE_LOGO_2021_web.png" alt="ECE In Logo">
+        </div>
+        <div class="navigation">
+            <a href="menu.html">Menu</a>
+        </div>
+        <div class="section">
+            <h2>Inscription</h2>
+            <form id="registerForm" action="register.php" method="post">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <br>
+                <label for="username">Pseudo:</label>
+                <input type="text" id="username" name="username" required>
+                <br>
+                <label for="password">Mot de passe:</label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <label for="first_name">Prénom:</label>
+                <input type="text" id="first_name" name="first_name">
+                <br>
+                <label for="last_name">Nom:</label>
+                <input type="text" id="last_name" name="last_name">
+                <br>
+                <label for="profile_picture">Photo de profil:</label>
+                <input type="text" id="profile_picture" name="profile_picture">
+                <br>
+                <label for="background_image">Image de fond:</label>
+                <input type="text" id="background_image" name="background_image">
+                <br>
+                <label for="bio">Biographie:</label>
+                <textarea id="bio" name="bio"></textarea>
+                <br>
+                <label for="user_type">Type d'utilisateur:</label>
+                <select id="user_type" name="user_type" required>
+                    <option value="author">Auteur</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <br>
+                <button type="submit">S'inscrire</button>
+            </form>
+        </div>
+        <div class="footer">
+            
+        </div>
+    </div>
+</body>
+</html>
