@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 // Récupérer les données du formulaire
 $email = $_POST['email'];
 $username = $_POST['username'];
-$password = $_POST['password']; // N'oubliez pas de hacher le mot de passe avant de l'insérer dans la base de données
+$password = $_POST['password']; 
 $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $profile_picture = $_POST['profile_picture'];

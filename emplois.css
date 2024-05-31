@@ -12,7 +12,7 @@ body {
     margin: 50px auto;
     padding: 20px;
     background-color: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px #1e73be;
     max-width: 1200px; /* Augmenté pour permettre plus de contenu côte à côte */
 }
 
