@@ -1,22 +1,23 @@
-<cv>
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
     <formation>
-        <titre>Ecole d'ingénieurs</titre>
-        <etablissement>ECE</etablissement>
-        <annee>2022-2027</annee>
+        <titre>Ingénieur en Informatique</titre>
+        <etablissement>ECE Paris</etablissement>
+        <annee>2022</annee>
     </formation>
     <formation>
-        <titre>Cycle secondaire</titre>
-        <etablissement>Lycée Marie Curie</etablissement>
-        <annee>2018-2022</annee>
+        <titre>Master en Intelligence Artificielle</titre>
+        <etablissement>Université de Paris</etablissement>
+        <annee>2024</annee>
     </formation>
     <projet>
-        <titre>Projet Piscine</titre>
-        <description>Création d'un site web à thèmes</description>
-        <annee>2024</annee>
+        <titre>Application de Gestion de Projets</titre>
+        <description>Développement d'une application web pour gérer les projets d'une entreprise.</description>
+        <annee>2023</annee>
     </projet>
     <projet>
-        <titre>Gyrobot</titre>
-        <description>Robot doté d'un gyropode</description>
+        <titre>Système de Reconnaissance Faciale</titre>
+        <description>Conception et développement d'un système de reconnaissance faciale basé sur l'apprentissage automatique.</description>
         <annee>2024</annee>
     </projet>
-</cv>
+</data>
