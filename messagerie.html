@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +48,9 @@
         <form id="messageForm">
             <div class="input-group mb-3">
                 <input type="hidden" id="sender_id" value="1"> <!-- Example sender -->
-                <input type="hidden" id="receiver_id" value="2"> <!-- Example receiver -->
+                <select id="receiver_id" class="form-control" required>
+                    <!-- Receiver options will be loaded here -->
+                </select>
                 <input type="text" id="content" class="form-control" placeholder="Type your message" required>
                 <button type="submit" class="btn btn-primary">Send</button>
             </div>
@@ -62,13 +63,32 @@
         function loadMessages() {
             const sender_id = $('#sender_id').val();
             const receiver_id = $('#receiver_id').val();
+            console.log('Loading messages between', sender_id, 'and', receiver_id); // Debug log
+
             $.get('messages.php', { sender_id, receiver_id }, function(data) {
+                console.log('Messages loaded:', data); // Debug log
                 const messages = JSON.parse(data);
                 $('#messages').empty();
                 messages.forEach(message => {
                     const messageClass = message.sender_id == sender_id ? 'sent' : 'received';
-                    $('#messages').append(`<div class="message ${messageClass}">${message.content} <small>${message.timestamp}</small></div>`);
+                    $('#messages').append(`<div class="message ${messageClass}">${message.message} <small>${message.created_at}</small></div>`);
                 });
+            }).fail(function(xhr, status, error) {
+                console.error('Error loading messages:', error); // Debug log
+            });
+        }
+
+        function loadUsers() {
+            $.get('users.php', function(data) {
+                console.log('Users loaded:', data); // Debug log
+                const users = JSON.parse(data);
+                const receiverSelect = $('#receiver_id');
+                receiverSelect.empty();
+                users.forEach(user => {
+                    receiverSelect.append(`<option value="${user.user_id}">${user.username}</option>`);
+                });
+            }).fail(function(xhr, status, error) {
+                console.error('Error loading users:', error); // Debug log
             });
         }
 
@@ -77,15 +97,21 @@
             const sender_id = $('#sender_id').val();
             const receiver_id = $('#receiver_id').val();
             const content = $('#content').val();
+            console.log('Sending message:', { sender_id, receiver_id, content }); // Debug log
+
             $.post('messages.php', { sender_id, receiver_id, content }, function(data) {
+                console.log('Message sent response:', data); // Debug log
                 const response = JSON.parse(data);
                 if (response.status === 'Message sent successfully') {
                     $('#content').val('');
                     loadMessages();
                 }
+            }).fail(function(xhr, status, error) {
+                console.error('Error sending message:', error); // Debug log
             });
         });
 
+        loadUsers();
         loadMessages();
         setInterval(loadMessages, 5000); // Refresh messages every 5 seconds
 
