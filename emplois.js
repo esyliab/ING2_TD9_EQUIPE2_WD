@@ -1,37 +1,72 @@
-document.getElementById('jobForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+// Fonction pour créer une nouvelle offre
+function creerOffre() {
+    // Récupérer les données du formulaire
+    var titre = document.getElementById('titre').value;
+    var description = document.getElementById('description').value;
 
-    // Récupérer les valeurs des champs du formulaire
+    // Stocker les données dans le localStorage
+    localStorage.setItem('nouvelleOffre', JSON.stringify({ titre: titre, description: description }));
+
+    // Rediriger vers la page notifications
+    window.location.href = 'notifications.html';
+}
+
+// Vérifier s'il y a une nouvelle offre
+if (localStorage.getItem('nouvelleOffre')) {
+    var nouvelleOffre = JSON.parse(localStorage.getItem('nouvelleOffre'));
+
+    // Afficher la notification sur la page notifications
+    var notificationsList = document.getElementById('notificationsList');
+    var nouvelleNotification = document.createElement('li');
+    nouvelleNotification.textContent = 'Nouvelle offre : ' + nouvelleOffre.titre;
+    notificationsList.appendChild(nouvelleNotification);
+
+    // Supprimer l'offre du localStorage après affichage de la notification
+    localStorage.removeItem('nouvelleOffre');
+}
+// Fonction pour afficher les notifications
+function afficherNotifications() {
+    // Vérifier s'il y a une nouvelle offre
+    if (localStorage.getItem('nouvelleOffre')) {
+        var nouvelleOffre = JSON.parse(localStorage.getItem('nouvelleOffre'));
+
+        // Afficher la notification sur la page notifications
+        var notificationsList = document.getElementById('notificationsList');
+        var nouvelleNotification = document.createElement('li');
+        nouvelleNotification.textContent = 'Nouvelle offre : ' + nouvelleOffre.titre;
+        notificationsList.appendChild(nouvelleNotification);
+
+        // Supprimer l'offre du localStorage après affichage de la notification
+        localStorage.removeItem('nouvelleOffre');
+    }
+}
+
+// Appeler la fonction d'affichage des notifications périodiquement
+setInterval(afficherNotifications, 1000); // 1000ms = 1 seconde
+
+// Récupération du formulaire
+const jobForm = document.getElementById('jobForm');
+
+// Récupération de la liste des emplois
+const jobList = document.getElementById('jobList');
+
+// Écouteur d'événement pour le formulaire
+jobForm.addEventListener('submit', function(event) {
+    event.preventDefault(); // Pour empêcher la soumission du formulaire
+
+    // Récupération des valeurs du formulaire
     const jobTitle = document.getElementById('jobTitle').value;
     const contractType = document.getElementById('contractType').value;
     const salary = document.getElementById('salary').value;
     const location = document.getElementById('location').value;
 
-    // Créer un nouvel élément de liste pour afficher le job
-    const jobItem = document.createElement('li');
-    jobItem.textContent = `${jobTitle} - ${contractType} - ${salary}€ - ${location}`;
+    // Création de l'élément li contenant les informations de l'offre d'emploi
+    const newJobItem = document.createElement('li');
+    newJobItem.textContent = `${jobTitle} - ${contractType} - Salaire: ${salary} - Localisation: ${location}`;
 
-    // Ajouter l'élément de liste à la liste des emplois
-    document.getElementById('jobList').appendChild(jobItem);
+    // Ajout de la nouvelle offre d'emploi à la liste
+    jobList.insertBefore(newJobItem, jobList.firstChild);
 
-    // Réinitialiser le formulaire
-    document.getElementById('jobForm').reset();
-
-    // Afficher un message de notification sur la page
-    showMessage(`Nouvelle offre d'emploi: ${contractType}`);
+    // Effacer les champs du formulaire après soumission
+    jobForm.reset();
 });
-
-function showMessage(message) {
-    // Créer un élément de div pour le message
-    const messageDiv = document.createElement('div');
-    messageDiv.className = 'notification';
-    messageDiv.textContent = message;
-
-    // Ajouter le message au corps du document
-    document.body.appendChild(messageDiv);
-
-    // Supprimer le message après 3 secondes
-    setTimeout(() => {
-        document.body.removeChild(messageDiv);
-    }, 3000);
-}
