@@ -7,11 +7,13 @@ body {
 
 /* Container styles */
 .container {
-    max-width: 600px;
+    display: flex;
+    justify-content: space-between;
     margin: 50px auto;
     padding: 20px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 1200px; /* Augmenté pour permettre plus de contenu côte à côte */
 }
 
 /* Header styles */
@@ -71,9 +73,20 @@ body {
 }
 
 /* Jobs section styles */
-.jobs {
-    flex: 1;
+.left-panel, .right-panel {
+    background-color: white;
     padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.left-panel {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.right-panel {
+    flex: 2;
 }
 
 .jobs h1 {
@@ -182,7 +195,6 @@ li {
 .notification.show {
     opacity: 1;
 }
-
 
 /* Favorite button styles */
 .favorite-button {
