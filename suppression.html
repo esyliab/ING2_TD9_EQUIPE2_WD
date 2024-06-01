@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suppression utilisateur | ECE In</title>
+    <link rel="stylesheet" href="accueil.css">
+    <link rel="icon" type="image/vnd.icon" href="ECE_LOGO_2021_web.ico">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div>ECE In: Social Media Professionnel de l’ECE Paris</div>
+            <img src="ECE_LOGO_2021_web.png" alt="ECE In Logo">
+        </div>
+        <div class="navigation">
+            <a href="menu.html" class="active">Menu</a>
+            <a href="ajout.html">Ajouter un utilisateur</a>
+        </div>
+        <div class="section">   
+            <form id="deleteUserForm" action="suppression.php" method="post">
+                <label for="username">Pseudo de l'utilisateur :</label>
+                <input type="text" id="username" name="username" required>
+                <button type="submit">Supprimer</button>
+            </form>
+            <div id="message"></div> 
+        </div>
+        <script>
+            document.getElementById('deleteUserForm').addEventListener('submit', function(event) {
+                const username = document.getElementById('username').value;
+                if (!confirm(`Êtes-vous sûr de vouloir supprimer l'utilisateur ${username} ?`)) {
+                    event.preventDefault();
+                }
+            });
+        </script>
+        <div class="footer">
+            <p>Nous contacter :</p>
+            <p>Email : <a href="mailto:admissions-paris@ece.fr">admissions-paris@ece.fr</a></p>
+            <p>Téléphone : <a href="tel:0123456789">01.44.39.06.00</a></p>
+        </div>
+    </div>
+</body>
+</html>

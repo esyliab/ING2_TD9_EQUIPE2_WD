@@ -29,12 +29,15 @@ if ($result->num_rows > 0) {
     $_SESSION['user_id'] = $user['user_id'];
     $_SESSION['email'] = $user['email'];
     $_SESSION['username'] = $user['username'];
+    $_SESSION['user_type'] = $user['user_type'];
 
     $conn->begin_transaction();
 
     try {
+        // Set is_active to FALSE for all users
         $conn->query("UPDATE Users SET is_active = FALSE");
 
+        // Set is_active to TRUE for the current user
         $update_stmt = $conn->prepare("UPDATE Users SET is_active = TRUE WHERE user_id = ?");
         $update_stmt->bind_param("i", $user['user_id']);
         $update_stmt->execute();
@@ -48,7 +51,12 @@ if ($result->num_rows > 0) {
         exit();
     }
 
-    header("Location: accueil.html");
+    // Redirect based on user type
+    if ($user['user_type'] === 'admin') {
+        header("Location: admin.html");
+    } else {
+        header("Location: accueil.html");
+    }
     exit(); 
 } else {
     header("Location: login.html?error=invalid_credentials");

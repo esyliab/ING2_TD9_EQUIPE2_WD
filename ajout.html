@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajout utilisateur | ECE In</title>
+    <link rel="stylesheet" href="accueil.css">
+    <link rel="icon" type="image/vnd.icon" href="ECE_LOGO_2021_web.ico">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div>ECE In: Social Media Professionnel de l’ECE Paris</div>
+            <img src="ECE_LOGO_2021_web.png" alt="ECE In Logo">
+        </div>
+        <div class="navigation">
+            <a href="menu.html" class="active">Menu</a>
+            <a href="suppression.html">Supprimer un utilisateur</a>
+        </div>
+        <div class="section">   
+            <form id="registerForm" action="register.php" method="post">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <br>
+                <label for="username">Pseudo:</label>
+                <input type="text" id="username" name="username" required>
+                <br>
+                <label for="password">Mot de passe:</label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <label for="first_name">Prénom:</label>
+                <input type="text" id="first_name" name="first_name">
+                <br>
+                <label for="last_name">Nom:</label>
+                <input type="text" id="last_name" name="last_name">
+                <br>
+                <label for="profile_picture">Photo de profil:</label>
+                <input type="text" id="profile_picture" name="profile_picture">
+                <br>
+                <label for="background_image">Image de fond:</label>
+                <input type="text" id="background_image" name="background_image">
+                <br>
+                <label for="bio">Biographie:</label>
+                <textarea id="bio" name="bio"></textarea>
+                <br>
+                <button type="submit">Ajouter l'utilisateur</button>
+            </form>
+        </div>
+        <div class="footer">
+            <p>Nous contacter :</p>
+            <p>Email : <a href="mailto:admissions-paris@ece.fr">admissions-paris@ece.fr</a></p>
+            <p>Téléphone : <a href="tel:0123456789">01.44.39.06.00</a></p>
+        </div>
+    </div>
+</body>
+</html>
