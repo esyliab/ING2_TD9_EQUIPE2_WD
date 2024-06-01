@@ -1,28 +1,46 @@
 <?php
-// Connexion à la base de données
+// vous.php
+
+// Start session
+session_start();
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(['error' => 'User not logged in']);
+    exit();
+}
+
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "ece_in";
+$dbname = "ECE_Social_Media";
 
+// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+// Check connection
 if ($conn->connect_error) {
-    die("La connexion a échoué : " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
-$type = $_POST['type'];
-$description = $_POST['description'];
-$date = $_POST['date'];
-$utilisateur_id = $_POST['utilisateur_id'];
+// Get the logged-in user's ID from the session
+$user_id = $_SESSION['user_id'];
 
-$sql = "INSERT INTO formations_projets (utilisateur_id, type, description, date) VALUES ('$utilisateur_id', '$type', '$description', '$date')";
+// Prepare and execute the query to fetch user details
+$stmt = $conn->prepare("SELECT username, first_name, last_name, profile_picture, background_image FROM Users WHERE user_id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
 
-if ($conn->query($sql) === TRUE) {
-    echo "Les données ont été insérées avec succès.";
+// Check if the user exists
+if ($result->num_rows > 0) {
+    $user = $result->fetch_assoc();
+    echo json_encode($user);
 } else {
-    echo "Erreur lors de l'insertion des données : " . $conn->error;
+    echo json_encode(['error' => 'User not found']);
 }
 
+// Close the statement and connection
+$stmt->close();
 $conn->close();
 ?>

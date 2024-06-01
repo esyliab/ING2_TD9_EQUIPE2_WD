@@ -29,9 +29,10 @@
                 <p id="pseudoPlaceholder"></p>
                 <p id="firstNamePlaceholder"></p>
                 <p id="lastNamePlaceholder"></p>
+                <img id="profileImage" alt="Profile Image">
+                <img id="backgroundImage" alt="Background Image" style="width: 100%; height: auto;">
                 <input type="file" id="fileInput" accept="image/*" style="display: none;">
                 <button onclick="document.getElementById('fileInput').click();">Choisir une photo</button>
-                <img id="profileImage" alt="Profile Image">
                 <div id="entryList">
                     <h3>Formations et Projets</h3>
                 </div>
@@ -72,7 +73,7 @@
 
     <script>
         window.onload = function() {
-            fetch('vous2.php')
+            fetch('vous.php')
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
@@ -81,6 +82,8 @@
                         document.getElementById('pseudoPlaceholder').innerText = "Pseudo : " + data.username;
                         document.getElementById('firstNamePlaceholder').innerText = "Prénom : " + data.first_name;
                         document.getElementById('lastNamePlaceholder').innerText = "Nom : " + data.last_name;
+                        document.getElementById('profileImage').src = data.profile_picture;
+                        document.getElementById('backgroundImage').src = data.background_image;
                     }
                 })
                 .catch(error => console.error('Erreur:', error));
