@@ -11,6 +11,7 @@
 <body>
     <div class="wrapper">
         <div class="header">
+            
             <div>ECE In: Social Media Professionnel de l’ECE Paris</div>
             <img src="ECE_LOGO_2021_web.png" alt="ECE In Logo">
         </div>
@@ -23,15 +24,58 @@
             <a href="emplois.html">Emplois</a>
         </div>
         <div class="section">
+            <div class="date-picker">
+                <label for="currentDate">Sélectionnez la date :</label>
+                <input type="date" id="currentDate" name="currentDate">
+            </div>
             <form id="logoutForm" action="logout.php" method="post" style="display:inline;">
                 <button type="submit">Déconnexion</button>
             </form>
             <h2>Bienvenue sur ECE In</h2>
             <p>ECE In est le réseau social professionnel de l’ECE Paris. Connectez-vous avec vos pairs, découvrez des opportunités de carrière et restez informé des événements importants de notre communauté.</p>
             
+            <div id="banner" class="banner">
+                <img id="bannerImage" src="" alt="Banner Image">
+            </div>
+
             <h3>Événement de la semaine</h3>
             
-            
+            <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const dateInput = document.getElementById('currentDate');
+            const banner = document.getElementById('banner');
+            const bannerImage = document.getElementById('bannerImage');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.value = today;
+
+            function checkDate(date) {
+                const selectedDate = new Date(date);
+                const month = selectedDate.getMonth() + 1; // Months are 0-based
+                const day = selectedDate.getDate();
+
+                if ((month === 12 && (day === 31 || day === 25 || day === 24)) || (month === 1 && day === 1)) {
+                    bannerImage.src = "nouvel_an.png";
+                    banner.style.display = 'block';
+                } else if (month === 2 && day === 14) {
+                    bannerImage.src = "saint_valentin.png";
+                    banner.style.display = 'block';
+                } else if (month === 12 && (day === 24 || day === 25)) {
+                    bannerImage.src = "noel.png";
+                    banner.style.display = 'block';
+                } else {
+                    banner.style.display = 'none';
+                }
+            }
+
+            // Initial check
+            checkDate(today);
+
+            dateInput.addEventListener('change', () => {
+                checkDate(dateInput.value);
+            });
+        });
+    </script>
+    
             <script src="script.js"></script>
             <div class="event">
                 <h2><a href="carrousel.html">Welcome Day</a></h2>
