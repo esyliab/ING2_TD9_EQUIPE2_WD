@@ -84,7 +84,7 @@
                     📍 Retrouvez nous ce samedi 1er juin sur nos Campus de Paris, Lyon et Bordeaux pour notre Welcome Day, <a href="https://www.ece.fr/inseecu/journees-portes-ouvertes">Inscription ici </a></p>
             </div>
 
-            <h3><a href="event.html">Ajout photo, vidéo, évènement, </a><a href="event_modif.html"> Modifier un Évènement, </a><a href="event_sup.html"> Supprimer un Évènement,</a></h3>
+            <h4><a href="event.html">Ajout photo, vidéo, évènement, </a></h4>
             
             <div id="eventsList"></div>
             <script>
@@ -107,7 +107,12 @@
                         .catch(error => console.error('Erreur:', error));
                 });
             </script>
-            
+            <h4>Évènements existants</h4>
+                <h4>Évènements existants</h4>
+
+            <div id="events">
+                <?php include 'fetch_events2.php'; ?>
+            </div>
             
         </div>
         <div class="footer">
