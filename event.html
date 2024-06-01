@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evènement | ECE In</title>
+    <link rel="stylesheet" href="accueil.css">
+    <link rel="icon" type="image/vnd.icon" href="ECE_LOGO_2021_web.ico">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            
+            <div>ECE In: Social Media Professionnel de l’ECE Paris</div>
+            <img src="ECE_LOGO_2021_web.png" alt="ECE In Logo">
+        </div>
+        <div class="navigation">
+            <a href="accueil.html">Accueil</a>
+        </div>
+        <div class="section">
+
+
+            <h3>Ajout photo, vidéo, évènement</h3>
+        
+            <h4>Ajout d'évènement</h4>
+            <form id="createEventForm" action="event.php" method="post">
+                <label for="title">Titre de l'évènement :</label>
+                <input type="text" id="title" name="title" required><br>
+
+                <label for="description">Description :</label>
+                <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
+
+                <label for="eventDate">Date de l'évènement :</label>
+                <input type="date" id="eventDate" name="eventDate" required><br>
+
+                <label for="location">Lieu :</label>
+                <input type="text" id="location" name="location" required><br>
+
+                <button type="submit">Créer l'Évènement</button>
+            </form>
+
+            <h4>Ajout de photo / vidéo</h4>
+                <form action="photo.php" method="post">
+                    <label for="title">Titre de la photo :</label><br>
+                    <input type="text" id="title" name="title" required><br>
+
+                    <label for="lieu">Lieu de la photo :</label><br>
+                    <input type="text" id="lieu" name="lieu" required><br>
+
+                    <label for="date">Date de prise :</label><br>
+                    <input type="date" id="date" name="date" required><br>
+
+                    <label for="image">URL de l'image :</label><br>
+                    <input type="text" id="image" name="image" required><br>
+
+                    <button type="submit">Ajouter la photo</button>
+                </form>
+        
+        </div>
+        <div class="footer">
+            <p>Nous contacter :</p>
+            <p>Email : <a href="mailto:admissions-paris@ece.fr">admissions-paris@ece.fr</a></p>
+            <p>Téléphone : <a href="tel:0123456789">01.44.39.06.00</a></p>
+        </div>
+    </div>
+</body>
+</html>
