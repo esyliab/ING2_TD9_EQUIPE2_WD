@@ -1,4 +1,4 @@
-/* reseaux.css */
+/* profil.css */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -74,56 +74,30 @@ body {
     color: #1e73be;
 }
 
-.search-bar {
-    margin: 20px 0;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-#search-results, #connections-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.connection-card, .search-result-card {
+.profile-card {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 1rem;
-    width: 200px;
+    width: 300px;
+    margin: 0 auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-.search-result-card button {
-    background-color: #1e73be;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.search-result-card button:hover {
-    background-color: #155a9a;
-}
-
-.user-card img.profile-picture,
-.search-result-card img.profile-picture {
-    width: 100px;
-    height: 100px;
+.profile-card img.profile-picture {
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.notification-item {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
+.user-link {
+    text-decoration: none;
+    color: #1e73be;
+    font-weight: bold;
+}
+
+.user-link:hover {
+    text-decoration: underline;
 }

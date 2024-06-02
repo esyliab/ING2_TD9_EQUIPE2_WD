@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "11bis@Djaze";
 $dbname = "ECE_Social_Media";
 
 // Create connection
