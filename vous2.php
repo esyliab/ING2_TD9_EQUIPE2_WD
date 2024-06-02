@@ -2,7 +2,7 @@
 // Configuration des paramètres de la base de données
 $servername = "localhost";
 $username = "root";
-$password = "11bis@Djaze";
+$password = "";
 $dbname = "djaze_database"; // Remplacez par le nom de votre base de données
 
 // Création de la connexion

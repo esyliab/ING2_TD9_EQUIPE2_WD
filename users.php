@@ -2,7 +2,7 @@
 $host = 'localhost'; 
 $db = 'ece_social_media';
 $user = 'root'; 
-$pass = '11bis@Djaze'; 
+$pass = ''; 
 
 $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
 $options = [

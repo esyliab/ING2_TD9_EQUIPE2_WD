@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
 
 $servername = "localhost";
 $username = "root";
-$password = "11bis@Djaze";
+$password = "";
 $dbname = "ECE_Social_Media";
 
 // Create connection
