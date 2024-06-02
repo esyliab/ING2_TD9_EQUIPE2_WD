@@ -11,7 +11,6 @@
 <body>
     <div class="wrapper">
         <div class="header">
-            
             <div>ECE In: Social Media Professionnel de l’ECE Paris</div>
             <img src="ECE_LOGO_2021_web.png" alt="ECE In Logo">
         </div>
@@ -41,39 +40,39 @@
             <h3>Événement de la semaine</h3>
             
             <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const dateInput = document.getElementById('currentDate');
-            const banner = document.getElementById('banner');
-            const bannerImage = document.getElementById('bannerImage');
-            const today = new Date().toISOString().split('T')[0];
-            dateInput.value = today;
+                document.addEventListener('DOMContentLoaded', (event) => {
+                    const dateInput = document.getElementById('currentDate');
+                    const banner = document.getElementById('banner');
+                    const bannerImage = document.getElementById('bannerImage');
+                    const today = new Date().toISOString().split('T')[0];
+                    dateInput.value = today;
 
-            function checkDate(date) {
-                const selectedDate = new Date(date);
-                const month = selectedDate.getMonth() + 1;
-                const day = selectedDate.getDate();
+                    function checkDate(date) {
+                        const selectedDate = new Date(date);
+                        const month = selectedDate.getMonth() + 1;
+                        const day = selectedDate.getDate();
 
-                if ((month === 12 && (day === 31 || day === 25 || day === 24)) || (month === 1 && day === 1)) {
-                    bannerImage.src = "nouvel_an.png";
-                    banner.style.display = 'block';
-                } else if (month === 2 && day === 14) {
-                    bannerImage.src = "saint_valentin.png";
-                    banner.style.display = 'block';
-                } else if (month === 12 && (day === 24 || day === 25)) {
-                    bannerImage.src = "noel.png";
-                    banner.style.display = 'block';
-                } else {
-                    banner.style.display = 'none';
-                }
-            }
+                        if ((month === 12 && (day === 31 || day === 25 || day === 24)) || (month === 1 && day === 1)) {
+                            bannerImage.src = "nouvel_an.png";
+                            banner.style.display = 'block';
+                        } else if (month === 2 && day === 14) {
+                            bannerImage.src = "saint_valentin.png";
+                            banner.style.display = 'block';
+                        } else if (month === 12 && (day === 24 || day === 25)) {
+                            bannerImage.src = "noel.png";
+                            banner.style.display = 'block';
+                        } else {
+                            banner.style.display = 'none';
+                        }
+                    }
 
-            checkDate(today);
+                    checkDate(today);
 
-            dateInput.addEventListener('change', () => {
-                checkDate(dateInput.value);
-            });
-        });
-    </script>
+                    dateInput.addEventListener('change', () => {
+                        checkDate(dateInput.value);
+                    });
+                });
+            </script>
     
             <script src="script.js"></script>
             <div class="event">
@@ -97,9 +96,10 @@
                                 const eventItem = document.createElement('div');
                                 eventItem.innerHTML = `
                                     <h3>${event.title}</h3>
-                                    <p>${event.description}</p>32
+                                    <p>${event.description}</p>
                                     <p><strong>Date:</strong> ${event.event_date}</p>
                                     <p><strong>Lieu:</strong> ${event.location}</p>
+                                    <img src="${event.image_path}" alt="${event.title}">
                                 `;
                                 eventsList.appendChild(eventItem);
                             });
@@ -126,6 +126,7 @@
                         <p>${event.description}</p>
                         <p><strong>Date:</strong> ${event.event_date}</p>
                         <p><strong>Lieu:</strong> ${event.location}</p>
+                        <img src="${event.image_path}" alt="${event.title}">
                         <form action="delete_event.php" method="post" style="display:inline-block;">
                             <input type="hidden" name="event_id" value="${event.event_id}">
                             <button type="submit">Supprimer</button>

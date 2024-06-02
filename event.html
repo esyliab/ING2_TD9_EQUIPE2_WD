@@ -10,7 +10,6 @@
 <body>
     <div class="wrapper">
         <div class="header">
-            
             <div>ECE In: Social Media Professionnel de l’ECE Paris</div>
             <img src="ECE_LOGO_2021_web.png" alt="ECE In Logo">
         </div>
@@ -18,12 +17,10 @@
             <a href="accueil.html">Accueil</a>
         </div>
         <div class="section">
-
-
             <h3>Ajout photo, vidéo, évènement</h3>
         
             <h4>Ajout d'évènement</h4>
-            <form id="createEventForm" action="event.php" method="post">
+            <form id="createEventForm" action="event.php" method="post" enctype="multipart/form-data">
                 <label for="title">Titre de l'évènement :</label>
                 <input type="text" id="title" name="title" required><br>
 
@@ -36,11 +33,14 @@
                 <label for="location">Lieu :</label>
                 <input type="text" id="location" name="location" required><br>
 
+                <label for="image">Photo de l'évènement :</label>
+                <input type="file" id="image" name="image" accept="image/*" required><br>
+
                 <button type="submit">Créer l'Évènement</button>
             </form>
-
+        
             <h4>Ajout de photo / vidéo</h4>
-                <form action="photo.php" method="post">
+                <form action="photo.php" method="post" enctype="multipart/form-data">
                     <label for="title">Titre de la photo :</label><br>
                     <input type="text" id="title" name="title" required><br>
 
@@ -51,7 +51,7 @@
                     <input type="date" id="date" name="date" required><br>
 
                     <label for="image">URL de l'image :</label><br>
-                    <input type="text" id="image" name="image" required><br>
+                    <input type="file" id="image" name="image" accept="image/*" required><br>
 
                     <button type="submit">Ajouter la photo</button>
                 </form>

@@ -23,16 +23,30 @@ $description = $_POST['description'];
 $event_date = $_POST['eventDate'];
 $location = $_POST['location'];
 
-$sql = "INSERT INTO Events (user_id, title, description, event_date, location) VALUES (?, ?, ?, ?, ?)";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("issss", $user_id, $title, $description, $event_date, $location);
+// Handle file upload
+if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+    $imageTmpName = $_FILES['image']['tmp_name'];
+    $imageName = basename($_FILES['image']['name']);
+    $imagePath = 'uploads/' . $imageName;
 
-if ($stmt->execute()) {
-    header("Location: event.html");
+    if (move_uploaded_file($imageTmpName, $imagePath)) {
+        $sql = "INSERT INTO Events (user_id, title, description, event_date, location, image_path) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("isssss", $user_id, $title, $description, $event_date, $location, $imagePath);
+
+        if ($stmt->execute()) {
+            header("Location: event.html");
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+        $stmt->close();
+    } else {
+        echo "Failed to upload image.";
+    }
 } else {
-    echo "Error: " . $stmt->error;
+    echo "Image upload error.";
 }
 
-$stmt->close();
 $conn->close();
 ?>

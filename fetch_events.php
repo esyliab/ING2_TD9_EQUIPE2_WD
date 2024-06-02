@@ -10,14 +10,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT title, description, event_date, location FROM Events ORDER BY event_date DESC";
+$sql = "SELECT event_id, title, description, event_date, location, image_path FROM Events";
 $result = $conn->query($sql);
 
-$events = [];
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $events[] = $row;
-    }
+$events = array();
+while ($row = $result->fetch_assoc()) {
+    $events[] = $row;
 }
 
 echo json_encode($events);
