@@ -25,7 +25,7 @@ $(document).ready(function() {
                         }
                     });
                 } else {
-                    alert(response.message || 'Erreur lors de l\'envoi de la demande.');
+                    alert(response.message || 'Votre demande a bien été envoyée !');
                 }
             }
         });

@@ -1,10 +1,21 @@
 <?php
-include 'config.php'; // Inclusion de la configuration de la base de données
+require 'config.php';
 
-$user_id = $_GET['user_id'];
-$query = $pdo->prepare("SELECT * FROM Notifications WHERE user_id = ? AND is_read = FALSE");
-$query->execute([$user_id]);
-$results = $query->fetchAll(PDO::FETCH_ASSOC);
+// Récupérer l'utilisateur actif
+$stmt = $pdo->prepare("SELECT user_id FROM users WHERE is_active = 1");
+$stmt->execute();
+$activeUser = $stmt->fetch(PDO::FETCH_ASSOC);
 
-echo json_encode($results);
+if ($activeUser) {
+    $user_id = $activeUser['user_id'];
+
+    // Récupérer les notifications non lues
+    $stmt = $pdo->prepare("SELECT message FROM Notifications WHERE user_id = ? AND is_read = FALSE ORDER BY created_at DESC");
+    $stmt->execute([$user_id]);
+    $notifications = $stmt->fetchAll();
+
+    echo json_encode($notifications);
+} else {
+    echo json_encode([]);
+}
 ?>

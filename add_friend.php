@@ -1,35 +1,54 @@
 <?php
-session_start();
 require 'config.php';
 
-if (isset($_POST['receiver_id']) && isset($_POST['receiver_username'])) {
-    $sender_id = $_SESSION['user_id']; // Utilisateur connecté
-    $receiver_id = $_POST['receiver_id'];
-    $receiver_username = $_POST['receiver_username'];
+$response = ['success' => false, 'message' => ''];
 
-    // Check if the users are already friends
-    $stmt = $pdo->prepare("SELECT * FROM Connections WHERE (user_id1 = ? AND user_id2 = ?) OR (user_id1 = ? AND user_id2 = ?)");
-    $stmt->execute([$sender_id, $receiver_id, $receiver_id, $sender_id]);
-    if ($stmt->rowCount() > 0) {
-        echo json_encode(['success' => false, 'message' => 'Vous êtes déjà amis.']);
-    } else {
-        // Insert the friend request
-        $stmt = $pdo->prepare("INSERT INTO Connections (user_id1, user_id2, status) VALUES (?, ?, 'pending')");
-        if ($stmt->execute([$sender_id, $receiver_id])) {
-            // Add notification for the sender
-            $stmt = $pdo->prepare("INSERT INTO Notifications (user_id, message) VALUES (?, ?)");
-            $stmt->execute([$sender_id, "Vous avez envoyé une demande d'ami à $receiver_username."]);
+try {
+    // Récupérer l'utilisateur actif
+    $stmt = $pdo->prepare("SELECT user_id, username FROM users WHERE is_active = 1");
+    $stmt->execute();
+    $activeUser = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Add notification for the receiver
-            $stmt = $pdo->prepare("INSERT INTO Notifications (user_id, message) VALUES (?, ?)");
-            $stmt->execute([$receiver_id, "Vous avez reçu une demande d'ami de " . $_SESSION['username']]);
+    if ($activeUser) {
+        $sender_id = $activeUser['user_id'];
+        $sender_username = $activeUser['username'];
 
-            echo json_encode(['success' => true]);
+        if (isset($_POST['receiver_id']) && isset($_POST['receiver_username'])) {
+            $receiver_id = $_POST['receiver_id'];
+            $receiver_username = $_POST['receiver_username'];
+
+            // Vérifier si les utilisateurs sont déjà amis ou s'il y a une demande en attente
+            $stmt = $pdo->prepare("SELECT * FROM Connections WHERE (user_id1 = ? AND user_id2 = ?) OR (user_id1 = ? AND user_id2 = ?)");
+            $stmt->execute([$sender_id, $receiver_id, $receiver_id, $sender_id]);
+            if ($stmt->rowCount() > 0) {
+                $response['message'] = 'Vous avez déjà une connexion ou une demande en attente.';
+            } else {
+                // Insérer la demande d'ami
+                $stmt = $pdo->prepare("INSERT INTO Connections (user_id1, user_id2, status) VALUES (?, ?, 'pending')");
+                if ($stmt->execute([$sender_id, $receiver_id])) {
+                    // Ajouter une notification pour l'expéditeur
+                    $stmt = $pdo->prepare("INSERT INTO Notifications (user_id, message) VALUES (?, ?)");
+                    $stmt->execute([$sender_id, "Vous avez envoyé une demande d'ami à $receiver_username."]);
+
+                    // Ajouter une notification pour le destinataire
+                    $stmt = $pdo->prepare("INSERT INTO Notifications (user_id, message) VALUES (?, ?)");
+                    $stmt->execute([$receiver_id, "Vous avez reçu une demande d'ami de $sender_username."]);
+
+                    $response['success'] = true;
+                    $response['message'] = 'Demande d\'ami envoyée avec succès.';
+                } else {
+                    $response['message'] = 'Erreur lors de l\'insertion de la demande d\'ami dans la base de données.';
+                }
+            }
         } else {
-            echo json_encode(['success' => false]);
+            $response['message'] = 'Données invalides.';
         }
+    } else {
+        $response['message'] = 'Utilisateur non trouvé ou non connecté.';
     }
-} else {
-    echo json_encode(['success' => false, 'message' => 'Données invalides.']);
+} catch (Exception $e) {
+    $response['message'] = 'Erreur : ' . $e->getMessage();
 }
+
+echo json_encode($response);
 ?>
