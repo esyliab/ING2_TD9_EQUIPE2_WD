@@ -7,6 +7,23 @@
     <link rel="stylesheet" href="accueil.css">
     <link rel="stylesheet" href="carousel.css">
     <link rel="icon" type="image/vnd.icon" href="ECE_LOGO_2021_web.ico">
+    <style>
+        /* Styles pour le bouton favori */
+        .favorite-button {
+            background-color: white; /* Couleur de fond initiale (blanc) */
+            border: 1px solid #ccc; /* Bordure grise */
+            color: #333; /* Couleur du texte */
+            padding: 8px 16px; /* Espacement intérieur du bouton */
+            cursor: pointer; /* Curseur de type pointeur au survol */
+            transition: background-color 0.3s ease; /* Transition fluide pour la couleur de fond */
+        }
+
+        /* Style pour le bouton favori lorsqu'il est actif (clic) */
+        .favorite-button.favori-active {
+            background-color: yellow; /* Couleur de fond jaune */
+            color: #333; /* Couleur du texte (peut être modifiée selon vos préférences) */
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -80,7 +97,7 @@
                 <h2><a href="carrousel.html">Welcome Day</a></h2>
                 <div class="image-container">
                     <img src="welcome_day.png" alt="Welcome Day">
-                    <button class="favorite-button" data-event-id="welcome_day_event_id" onclick="toggleFavorite(this)">Favori</button>
+                    <button class="favorite-button" data-event-id="welcome_day_event_id" onclick="toggleFavorite(this)">Favori ✨</button>
                 </div>
                 <p>Avec les <strong>Welcome Day de l'ECE</strong>Welcome Day de l'ECE, vivez une journée portes ouvertes qui sort de l'ordinaire 🎉 
                     L'ensemble de nos équipes pédagogiques et de nos étudiants viennent à votre rencontre afin de vous faire découvrir l'école, avec des animations, de la musique, de la street-food, lors d'une journée unique ✨ 
