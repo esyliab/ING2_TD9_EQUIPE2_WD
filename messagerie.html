@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,17 +36,15 @@
             <a href="messagerie.html" class="active">Messagerie</a>
             <a href="emplois.html">Emplois</a>
         </div>
-    <script src="carousel.js"></script>
+    
     <div class="container mt-5">
         <h1 class="text-center">Messagerie</h1>
         <div id="messages" class="border p-3 mb-3">
-            <!-- Messages will be loaded here -->
         </div>
         <form id="messageForm">
             <div class="input-group mb-3">
-                <input type="hidden" id="sender_id" value="1"> <!-- Example sender -->
+                <input type="hidden" id="sender_id" value="1">
                 <select id="receiver_id" class="form-control" required>
-                    <!-- Receiver options will be loaded here -->
                 </select>
                 <input type="text" id="content" class="form-control" placeholder="Type your message" required>
                 <button type="submit" class="btn btn-primary">envoyer</button>
@@ -54,7 +52,6 @@
         </form>
         <button id="teamsButton" class="btn btn-secondary">Rejoindre par Teams</button>
     </div>
-    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function loadMessages() {
