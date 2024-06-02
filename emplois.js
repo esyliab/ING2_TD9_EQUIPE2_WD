@@ -4,13 +4,13 @@ document.getElementById('jobForm').addEventListener('submit', function(event) {
     // Récupérer les valeurs des champs du formulaire
     const jobTitle = document.getElementById('jobTitle').value;
     const contractType = document.getElementById('contractType').value;
-    const contractTypee = document.getElementById('contractTypee').value;
+    const employmentType = document.getElementById('employmentType').value;
     const salary = document.getElementById('salary').value;
     const location = document.getElementById('location').value;
 
     // Créer un nouvel élément de liste pour afficher le job
     const jobItem = document.createElement('li');
-    jobItem.textContent = `${jobTitle} - ${contractType} - ${contractTypee}- ${salary}€ - ${location}`;
+    jobItem.textContent = `${jobTitle} - ${contractType} - ${employmentType} - ${salary}€ - ${location}`;
 
     // Ajouter l'élément de liste à la liste des emplois
     document.getElementById('jobList').appendChild(jobItem);
@@ -19,7 +19,7 @@ document.getElementById('jobForm').addEventListener('submit', function(event) {
     document.getElementById('jobForm').reset();
 
     // Afficher un message de notification sur la page avec le type de contrat
-    showMessage(`Nouveau type de contrat ajouté: ${contractType} ${contractTypee}`);
+    showMessage(`Nouveau type de contrat ajouté: ${contractType} - ${employmentType}`);
 });
 
 function showMessage(message) {
