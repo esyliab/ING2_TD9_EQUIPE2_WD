@@ -3,24 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | ECE In</title>
+    <title>Vous | ECE In</title>
+    <link rel="stylesheet" href="vous.css">
     <link rel="stylesheet" href="accueil.css">
+    <script src="vous.js" defer></script>
     <link rel="icon" type="image/vnd.icon" href="ECE_LOGO_2021_web.ico">
 </head>
 <body>
     <div class="wrapper">
         <div class="header">
+            
             <div>ECE In: Social Media Professionnel de l’ECE Paris</div>
             <img src="ECE_LOGO_2021_web.png" alt="ECE In Logo">
         </div>
         <div class="navigation">
-           <a href="menu.html">Menu</a> 
+            <a href="menu.html">Menu</a> 
            <a href="vous_admin.html">Vous</a>
             <a href="ajout.html">Ajouter un utilisateur</a>
             <a href="suppression.html">Supprimer un utilisateur</a>
         </div>
-        <div class="section">   
-            <h2>Souhaitez vous ajouter un supprimer un utilisateur ?</h2>
+
+        <div class="profile-grid">
+            <div class="profile-info">
+                <h2>Photo de profil</h2>
+                <p id="pseudoPlaceholder"></p>
+                <p id="firstNamePlaceholder"></p>
+                <p id="lastNamePlaceholder"></p>
+                <img id="profileImage" alt="Profile Image" style="width: 30%; height: auto;">
+                <img id="backgroundImage" alt="Background Image" style="width: 100%; height: auto;">
+                <input type="file" id="fileInput" accept="image/*" style="display: none;">
+
+            </div>
+           
+            
         </div>
         <div class="footer">
             <p>Nous contacter :</p>
@@ -28,5 +43,6 @@
             <p>Téléphone : <a href="tel:0123456789">01.44.39.06.00</a></p>
         </div>
     </div>
+
 </body>
 </html>
