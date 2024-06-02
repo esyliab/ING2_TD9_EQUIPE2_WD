@@ -66,10 +66,8 @@
                     <div id="cvContent"></div>
                     <button onclick="downloadPDF()">Télécharger en PDF</button>
                 </div>
-                <button id="cvButton" onclick="showCV()">Afficher le CV</button>
-                <div id="cvDetails" style="display:none;">
-                    <!-- Le contenu du CV sera affiché ici -->
-                </div>
+                <button onclick="showCV()">Afficher CV</button>
+                <div id="cvDetails" style="display: none;"></div>
             </div>
         </div>
         <div class="footer">
@@ -130,7 +128,7 @@
 
         function showCV() {
             const xhr = new XMLHttpRequest();
-            xhr.open("GET", "data.xml", true);
+            xhr.open("GET", "cv_data.xml", true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
