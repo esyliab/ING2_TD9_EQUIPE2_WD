@@ -31,13 +31,12 @@ $(document).ready(function() {
         });
     };
 
-    // Fetch and display users
     $.ajax({
         url: 'get_users.php',
         method: 'GET',
         success: function(users) {
             const userProfiles = JSON.parse(users);
-            connectionsList.empty(); // Clear the list before appending new data
+            connectionsList.empty(); 
             userProfiles.forEach(user => {
                 const userCard = $(`
                     <div class="user-card">
@@ -55,7 +54,6 @@ $(document).ready(function() {
         }
     });
 
-    // Search function
     $('#search-btn').on('click', function() {
         const keyword = $('#search-input').val();
         $.ajax({
@@ -64,7 +62,7 @@ $(document).ready(function() {
             data: { keyword },
             success: function(users) {
                 const searchResults = $('#search-results');
-                searchResults.empty(); // Clear previous results
+                searchResults.empty(); 
                 const userProfiles = JSON.parse(users);
                 if (userProfiles.length > 0) {
                     userProfiles.forEach(user => {

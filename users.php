@@ -14,7 +14,7 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-    die(json_encode(['status' => 'Connection failed: ' . $e->getMessage()])); // Improved error handling
+    die(json_encode(['status' => 'Connection failed: ' . $e->getMessage()])); 
 }
 
 $sql = "SELECT user_id, username FROM users";

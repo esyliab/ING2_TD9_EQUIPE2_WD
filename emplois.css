@@ -5,7 +5,6 @@ body {
     padding: 0;
 }
 
-/* Container styles */
 .container {
     display: flex;
     justify-content: space-between;
@@ -16,7 +15,6 @@ body {
     max-width: 1200px;
 }
 
-/* Header styles */
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -39,7 +37,6 @@ body {
     height: 50px;
 }
 
-/* Navigation styles */
 .navigation {
     background-color: #e0e0e0;
     display: flex;
@@ -72,7 +69,6 @@ body {
     color: white;
 }
 
-/* Jobs section styles */
 .left-panel, .right-panel {
     background-color: white;
     padding: 20px;
@@ -89,10 +85,9 @@ body {
     flex: 2;
 }
 
-/* Specific h1 styles for left-panel and right-panel */
 .left-panel h1,
 .right-panel h1 {
-    color: blue; /* Set the color to blue */
+    color: blue; 
 }
 
 .jobs h1 {
@@ -142,7 +137,6 @@ body {
     color: #1e73be;
 }
 
-/* Form styles */
 form {
     display: flex;
     flex-direction: column;
@@ -170,7 +164,6 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* List styles */
 ul {
     list-style-type: none;
     padding: 0;
@@ -189,7 +182,6 @@ li {
     opacity: 1;
 }
 
-/* Heading styles */
 h1, h2 {
     text-align: center;
 }

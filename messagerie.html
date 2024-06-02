@@ -60,9 +60,9 @@
         function loadMessages() {
             const sender_id = $('#sender_id').val();
             const receiver_id = $('#receiver_id').val();
-            console.log('Loading messages:', { sender_id, receiver_id }); // Debug log
+            console.log('Loading messages:', { sender_id, receiver_id }); 
             $.get('messages.php', { sender_id, receiver_id }, function(data) {
-                console.log('Messages loaded:', data); // Debug log
+                console.log('Messages loaded:', data); 
                 const messages = JSON.parse(data);
                 $('#messages').empty();
                 messages.forEach(message => {
@@ -70,7 +70,7 @@
                     $('#messages').append(`<div class="message ${messageClass}">${message.message} <small>${message.created_at}</small></div>`);
                 });
             }).fail(function(xhr, status, error) {
-                console.error('Error loading messages:', error); // Debug log
+                console.error('Error loading messages:', error); 
             });
         }
 
@@ -78,19 +78,19 @@
             const sender_id = $('#sender_id').val();
             const receiver_id = $('#receiver_id').val();
             const content = $('#content').val();
-            console.log('Sending message:', { sender_id, receiver_id, content }); // Debug log
+            console.log('Sending message:', { sender_id, receiver_id, content }); 
 
             $.post('messages.php', { sender_id, receiver_id, message: content }, function(data) {
-                console.log('Message sent response:', data); // Debug log
+                console.log('Message sent response:', data); 
                 const response = JSON.parse(data);
                 if (response.status === 'Message sent successfully') {
                     $('#content').val('');
                     loadMessages();
                 } else {
-                    console.error('Failed to send message:', response); // Debug log
+                    console.error('Failed to send message:', response); 
                 }
             }).fail(function(xhr, status, error) {
-                console.error('Error sending message:', error); // Debug log
+                console.error('Error sending message:', error); 
             });
         }
 
@@ -108,7 +108,7 @@
 
         function loadUsers() {
             $.get('users.php', function(data) {
-                console.log('Users loaded:', data); // Debug log
+                console.log('Users loaded:', data); 
                 const users = JSON.parse(data);
                 const receiverSelect = $('#receiver_id');
                 receiverSelect.empty();
@@ -116,13 +116,13 @@
                     receiverSelect.append(`<option value="${user.user_id}">${user.username}</option>`);
                 });
             }).fail(function(xhr, status, error) {
-                console.error('Error loading users:', error); // Debug log
+                console.error('Error loading users:', error); 
             });
         }
 
         loadUsers();
         loadMessages();
-        setInterval(loadMessages, 5000); // Refresh messages every 5 seconds
+        setInterval(loadMessages, 5000); 
 
         $('#teamsButton').on('click', function() {
             window.open('https://teams.microsoft.com/l/meetup-join/19%3ameeting_OTY3YzRmODMtMTYyNS00MGI2LTgxMjAtMmI4NzRjNTQzNjEw%40thread.v2/0?context=%7b%22Tid%22%3a%22a2697119-66c5-4126-9991-b0a8d15d367f%22%2c%22Oid%22%3a%2227972e9c-97cd-4f79-9bd1-2614a4b9c092%22%7d', '_blank');

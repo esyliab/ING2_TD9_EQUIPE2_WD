@@ -7,7 +7,7 @@ $(document).ready(function() {
             url: 'get_notifications.php',
             method: 'GET',
             success: function(notifications) {
-                notificationList.empty(); // Clear previous notifications
+                notificationList.empty(); 
                 const notificationItems = JSON.parse(notifications);
                 if (notificationItems.length > 0) {
                     notificationItems.forEach(notification => {
@@ -28,6 +28,5 @@ $(document).ready(function() {
         });
     }
 
-    // Fetch notifications when the page loads
     fetchNotifications();
 });
