@@ -74,6 +74,17 @@
             });
         });
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const eventsList = document.getElementById('eventsList');
+            eventsList.addEventListener('click', (event) => {
+                if (event.target.classList.contains('favorite-button')) {
+                    event.target.classList.toggle('favorite');
+                }
+            });
+        });
+    </script>
+    
     
             <script src="script.js"></script>
             <div class="event">

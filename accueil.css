@@ -97,6 +97,6 @@ body {
     cursor: pointer;
 }
 
-.favorite-button:hover {
+.favorite-button.favorite {
     color: yellow; /* ou rose */
 }
