@@ -84,19 +84,19 @@ body {
     height: auto;
 }
 
+/* Styles pour le bouton favori */
 .favorite-button {
-    background-color: transparent;
-    border: none;
-    color: black;
-    padding: 8px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin: 4px 2px;
-    cursor: pointer;
+    background-color: white; /* Couleur de fond initiale (blanc) */
+    border: 1px solid #ccc; /* Bordure grise */
+    color: #333; /* Couleur du texte */
+    padding: 8px 16px; /* Espacement intérieur du bouton */
+    cursor: pointer; /* Curseur de type pointeur au survol */
+    transition: background-color 0.3s ease; /* Transition fluide pour la couleur de fond */
 }
 
-.favorite-button.favorite {
-    color: yellow; /* ou rose */
+/* Style pour le bouton favori lorsqu'il est actif (clic) */
+.favorite-button.favori-active {
+    background-color: yellow; /* Couleur de fond jaune */
+    color: #333; /* Couleur du texte (peut être modifiée selon vos préférences) */
 }
+

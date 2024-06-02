@@ -73,30 +73,24 @@
                 checkDate(dateInput.value);
             });
         });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const eventsList = document.getElementById('eventsList');
-            eventsList.addEventListener('click', (event) => {
-                if (event.target.classList.contains('favorite-button')) {
-                    event.target.classList.toggle('favorite');
-                }
-            });
-        });
-    </script>
-    
+    </script>    
     
             <script src="script.js"></script>
             <div class="event">
                 <h2><a href="carrousel.html">Welcome Day</a></h2>
                 <div class="image-container">
                     <img src="welcome_day.png" alt="Welcome Day">
-                    <button class="favorite-button" data-event-id="welcome_day_event_id">Favori</button>
+                    <button class="favorite-button" data-event-id="welcome_day_event_id" onclick="toggleFavorite(this)">Favori</button>
                 </div>
                 <p>Avec les <strong>Welcome Day de l'ECE</strong>Welcome Day de l'ECE, vivez une journée portes ouvertes qui sort de l'ordinaire 🎉 
                     L'ensemble de nos équipes pédagogiques et de nos étudiants viennent à votre rencontre afin de vous faire découvrir l'école, avec des animations, de la musique, de la street-food, lors d'une journée unique ✨ 
                     📍 Retrouvez nous ce samedi 1er juin sur nos Campus de Paris, Lyon et Bordeaux pour notre Welcome Day, <a href="https://www.ece.fr/inseecu/journees-portes-ouvertes">Inscription ici </a></p>
             </div>
+            <script>
+                function toggleFavorite(button) {
+                    button.classList.toggle('favori-active');
+                }
+            </script>
             
 
             <h4><a href="event.html">Ajout photo, vidéo, évènement, </a></h4>
