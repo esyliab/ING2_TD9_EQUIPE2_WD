@@ -14,10 +14,6 @@ $options = [
 try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (\PDOException $e) {
-<<<<<<< HEAD
-    die(json_encode(['status' => 'Connection failed: ' . $e->getMessage()])); 
-=======
     die(json_encode(['status' => 'Connection failed: ' . $e->getMessage()]));
->>>>>>> e60a5186ed6a6b48fce19b5201bed40bc0603186
 }
 ?>
