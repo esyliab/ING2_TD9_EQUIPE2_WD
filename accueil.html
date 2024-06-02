@@ -78,11 +78,15 @@
             <script src="script.js"></script>
             <div class="event">
                 <h2><a href="carrousel.html">Welcome Day</a></h2>
-                <img src="welcome_day.png" alt="Welcome Day">
+                <div class="image-container">
+                    <img src="welcome_day.png" alt="Welcome Day">
+                    <button class="favorite-button" data-event-id="welcome_day_event_id">Favori</button>
+                </div>
                 <p>Avec les <strong>Welcome Day de l'ECE</strong>Welcome Day de l'ECE, vivez une journée portes ouvertes qui sort de l'ordinaire 🎉 
                     L'ensemble de nos équipes pédagogiques et de nos étudiants viennent à votre rencontre afin de vous faire découvrir l'école, avec des animations, de la musique, de la street-food, lors d'une journée unique ✨ 
                     📍 Retrouvez nous ce samedi 1er juin sur nos Campus de Paris, Lyon et Bordeaux pour notre Welcome Day, <a href="https://www.ece.fr/inseecu/journees-portes-ouvertes">Inscription ici </a></p>
             </div>
+            
 
             <h4><a href="event.html">Ajout photo, vidéo, évènement, </a></h4>
             
@@ -112,6 +116,40 @@
             <div id="eventsList">
                 <!-- Les événements seront chargés ici par JavaScript -->
             </div>
+            <div id="eventsList">
+                <!-- Les événements seront chargés ici par JavaScript -->
+            </div>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    fetch('fetch_events2.php')
+                        .then(response => response.json())
+                        .then(data => {
+                            const eventsList = document.getElementById('eventsList');
+                            data.forEach(event => {
+                                const eventItem = document.createElement('div');
+                                eventItem.innerHTML = `
+                                    <h3>${event.title}</h3>
+                                    <p>${event.description}</p>
+                                    <p><strong>Date:</strong> ${event.event_date}</p>
+                                    <p><strong>Lieu:</strong> ${event.location}</p>
+                                    <button class="favorite-button" data-event-id="${event.event_id}">Favori</button>
+                                    <form action="delete_event.php" method="post" style="display:inline-block;">
+                                        <input type="hidden" name="event_id" value="${event.event_id}">
+                                        <button type="submit">Supprimer</button>
+                                    </form>
+                                    <form action="edit_event.php" method="get" style="display:inline-block;">
+                                        <input type="hidden" name="event_id" value="${event.event_id}">
+                                        <button type="submit">Modifier</button>
+                                    </form>
+                                `;
+                                eventsList.appendChild(eventItem);
+                            });
+                        })
+                        .catch(error => console.error('Erreur:', error));
+                });
+            </script>
+            
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {

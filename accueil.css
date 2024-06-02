@@ -83,3 +83,20 @@ body {
     max-width: 100%;
     height: auto;
 }
+
+.favorite-button {
+    background-color: transparent;
+    border: none;
+    color: black;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.favorite-button:hover {
+    color: yellow; /* ou rose */
+}
