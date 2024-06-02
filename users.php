@@ -17,7 +17,7 @@ try {
     die(json_encode(['status' => 'Connection failed: ' . $e->getMessage()])); // Improved error handling
 }
 
-$sql = "SELECT user_id, username FROM Users";
+$sql = "SELECT user_id, username FROM users";
 $stmt = $pdo->query($sql);
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
