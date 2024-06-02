@@ -7,11 +7,27 @@
     <link rel="stylesheet" href="accueil.css">
     <link rel="stylesheet" href="carousel.css">
     <link rel="icon" type="image/vnd.icon" href="ECE_LOGO_2021_web.ico">
+    <style>
+        .favorite-button {
+            background: white;
+            border: 1px solid gray;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: gray;
+            padding: 5px 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .favorite-button.active {
+            background: yellow;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
         <div class="header">
-            
             <div>ECE In: Social Media Professionnel de l’ECE Paris</div>
             <img src="ECE_LOGO_2021_web.png" alt="ECE In Logo">
         </div>
@@ -73,16 +89,67 @@
                 checkDate(dateInput.value);
             });
         });
-    </script>
+    </script>    
     
             <script src="script.js"></script>
             <div class="event">
                 <h2><a href="carrousel.html">Welcome Day</a></h2>
-                <img src="welcome_day.png" alt="Welcome Day">
+                <div class="image-container">
+                    <img src="welcome_day.png" alt="Welcome Day">
+                    <button onclick="toggleFavorite(this)" class="favorite-button">⭐</button>
+
+                </div>
                 <p>Avec les <strong>Welcome Day de l'ECE</strong>Welcome Day de l'ECE, vivez une journée portes ouvertes qui sort de l'ordinaire 🎉 
                     L'ensemble de nos équipes pédagogiques et de nos étudiants viennent à votre rencontre afin de vous faire découvrir l'école, avec des animations, de la musique, de la street-food, lors d'une journée unique ✨ 
                     📍 Retrouvez nous ce samedi 1er juin sur nos Campus de Paris, Lyon et Bordeaux pour notre Welcome Day, <a href="https://www.ece.fr/inseecu/journees-portes-ouvertes">Inscription ici </a></p>
             </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    loadFavorites();
+                });
+            
+                function toggleFavorite(button) {
+                    const eventElement = button.parentElement;
+                    const eventId = eventElement.querySelector('.favorite-button').dataset.eventId;
+                    const isFavorite = eventElement.classList.toggle('favorite');
+            
+                    button.classList.toggle('active', isFavorite);
+            
+                    if (isFavorite) {
+                        saveFavorite(eventId);
+                    } else {
+                        removeFavorite(eventId);
+                    }
+                }
+            
+                function saveFavorite(eventId) {
+                    let favorites = JSON.parse(localStorage.getItem('eventFavorites')) || [];
+                    favorites.push(eventId);
+                    localStorage.setItem('eventFavorites', JSON.stringify(favorites));
+                }
+            
+                function removeFavorite(eventId) {
+                    let favorites = JSON.parse(localStorage.getItem('eventFavorites')) || [];
+                    favorites = favorites.filter(item => item !== eventId);
+                    localStorage.setItem('eventFavorites', JSON.stringify(favorites));
+                }
+            
+                function loadFavorites() {
+                    const favorites = JSON.parse(localStorage.getItem('eventFavorites')) || [];
+                    const eventElements = document.querySelectorAll('.event');
+            
+                    eventElements.forEach(eventElement => {
+                        const eventId = eventElement.querySelector('.favorite-button').dataset.eventId;
+                        const button = eventElement.querySelector('.favorite-button');
+                        if (favorites.includes(eventId)) {
+                            eventElement.classList.add('favorite');
+                            button.classList.add('active');
+                        }
+                    });
+                }
+            </script>
+            
+            
 
             <h4><a href="event.html">Ajout photo, vidéo, évènement, </a></h4>
             
@@ -112,6 +179,40 @@
             <div id="eventsList">
                 <!-- Les événements seront chargés ici par JavaScript -->
             </div>
+            <div id="eventsList">
+                <!-- Les événements seront chargés ici par JavaScript -->
+            </div>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    fetch('fetch_events2.php')
+                        .then(response => response.json())
+                        .then(data => {
+                            const eventsList = document.getElementById('eventsList');
+                            data.forEach(event => {
+                                const eventItem = document.createElement('div');
+                                eventItem.innerHTML = `
+                                    <h3>${event.title}</h3>
+                                    <p>${event.description}</p>
+                                    <p><strong>Date:</strong> ${event.event_date}</p>
+                                    <p><strong>Lieu:</strong> ${event.location}</p>
+                                    <button class="favorite-button" data-event-id="${event.event_id}">Favori</button>
+                                    <form action="delete_event.php" method="post" style="display:inline-block;">
+                                        <input type="hidden" name="event_id" value="${event.event_id}">
+                                        <button type="submit">Supprimer</button>
+                                    </form>
+                                    <form action="edit_event.php" method="get" style="display:inline-block;">
+                                        <input type="hidden" name="event_id" value="${event.event_id}">
+                                        <button type="submit">Modifier</button>
+                                    </form>
+                                `;
+                                eventsList.appendChild(eventItem);
+                            });
+                        })
+                        .catch(error => console.error('Erreur:', error));
+                });
+            </script>
+            
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {

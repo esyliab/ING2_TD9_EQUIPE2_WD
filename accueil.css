@@ -83,3 +83,12 @@ body {
     max-width: 100%;
     height: auto;
 }
+
+.transparent-text {
+    font-size: 2rem; /* Ajustez la taille de la police selon vos besoins */
+    font-weight: bold; /* Vous pouvez modifier le poids de la police selon vos besoins */
+    background: linear-gradient(white, white); /* Définir un dégradé avec la même couleur */
+    -webkit-background-clip: text; /* Pour les navigateurs basés sur WebKit */
+    background-clip: text; /* Pour les autres navigateurs */
+    color: transparent; /* Rendre le texte transparent */
+}

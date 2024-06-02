@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="accueil.css">
     <link rel="stylesheet" href="carousel.css">
     <link rel="icon" type="image/vnd.icon" href="ECE_LOGO_2021_web.ico">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Messagerie</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        .text-white {
+            color: white;
+        }
         #messages {
             max-height: 400px;
             overflow-y: auto;
@@ -39,32 +39,28 @@
             <a href="messagerie.html" class="active">Messagerie</a>
             <a href="emplois.html">Emplois</a>
         </div>
-    <script src="carousel.js"></script>
+    
     <div class="container mt-5">
         <h1 class="text-center">Messagerie</h1>
         <div id="messages" class="border p-3 mb-3">
-            <!-- Messages will be loaded here -->
         </div>
         <form id="messageForm">
             <div class="input-group mb-3">
-                <input type="hidden" id="sender_id" value="1"> <!-- Example sender -->
+                <input type="hidden" id="sender_id" value="1">
                 <select id="receiver_id" class="form-control" required>
-                    <!-- Receiver options will be loaded here -->
                 </select>
                 <input type="text" id="content" class="form-control" placeholder="Type your message" required>
-                <button type="submit" class="btn btn-primary">Send</button>
+                <button type="submit" class="btn btn-primary">envoyer</button>
             </div>
         </form>
         <button id="teamsButton" class="btn btn-secondary">Rejoindre par Teams</button>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         function loadMessages() {
             const sender_id = $('#sender_id').val();
             const receiver_id = $('#receiver_id').val();
-            console.log('Loading messages between', sender_id, 'and', receiver_id); // Debug log
-
+            console.log('Loading messages:', { sender_id, receiver_id }); // Debug log
             $.get('messages.php', { sender_id, receiver_id }, function(data) {
                 console.log('Messages loaded:', data); // Debug log
                 const messages = JSON.parse(data);
@@ -77,6 +73,38 @@
                 console.error('Error loading messages:', error); // Debug log
             });
         }
+
+        function submitMessage() {
+            const sender_id = $('#sender_id').val();
+            const receiver_id = $('#receiver_id').val();
+            const content = $('#content').val();
+            console.log('Sending message:', { sender_id, receiver_id, content }); // Debug log
+
+            $.post('messages.php', { sender_id, receiver_id, message: content }, function(data) {
+                console.log('Message sent response:', data); // Debug log
+                const response = JSON.parse(data);
+                if (response.status === 'Message sent successfully') {
+                    $('#content').val('');
+                    loadMessages();
+                } else {
+                    console.error('Failed to send message:', response); // Debug log
+                }
+            }).fail(function(xhr, status, error) {
+                console.error('Error sending message:', error); // Debug log
+            });
+        }
+
+        $('#messageForm').on('submit', function(e) {
+            e.preventDefault();
+            submitMessage();
+        });
+
+        $('#content').on('keydown', function(e) {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+                submitMessage();
+            }
+        });
 
         function loadUsers() {
             $.get('users.php', function(data) {
@@ -92,25 +120,6 @@
             });
         }
 
-        $('#messageForm').on('submit', function(e) {
-            e.preventDefault();
-            const sender_id = $('#sender_id').val();
-            const receiver_id = $('#receiver_id').val();
-            const content = $('#content').val();
-            console.log('Sending message:', { sender_id, receiver_id, content }); // Debug log
-
-            $.post('messages.php', { sender_id, receiver_id, content }, function(data) {
-                console.log('Message sent response:', data); // Debug log
-                const response = JSON.parse(data);
-                if (response.status === 'Message sent successfully') {
-                    $('#content').val('');
-                    loadMessages();
-                }
-            }).fail(function(xhr, status, error) {
-                console.error('Error sending message:', error); // Debug log
-            });
-        });
-
         loadUsers();
         loadMessages();
         setInterval(loadMessages, 5000); // Refresh messages every 5 seconds
@@ -119,5 +128,6 @@
             window.open('https://teams.microsoft.com/l/meetup-join/19%3ameeting_OTY3YzRmODMtMTYyNS00MGI2LTgxMjAtMmI4NzRjNTQzNjEw%40thread.v2/0?context=%7b%22Tid%22%3a%22a2697119-66c5-4126-9991-b0a8d15d367f%22%2c%22Oid%22%3a%2227972e9c-97cd-4f79-9bd1-2614a4b9c092%22%7d', '_blank');
         });
     </script>
+    <p class = "text-white">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.,</p>
 </body>
 </html>

@@ -73,3 +73,23 @@ body {
     font-size: 16px;
     color: #1e73be;
 }
+
+.notification-item {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification-item p {
+    margin: 0;
+    flex: 1;
+}
+
+.notification-item button {
+    margin-left: 10px;
+}

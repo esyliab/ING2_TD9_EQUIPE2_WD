@@ -3,7 +3,7 @@ require 'config.php';
 
 if (isset($_GET['keyword'])) {
     $keyword = $_GET['keyword'];
-    $stmt = $pdo->prepare("SELECT user_id, username, email FROM users WHERE username LIKE ?");
+    $stmt = $pdo->prepare("SELECT user_id, username, email, profile_picture FROM users WHERE username LIKE ?");
     $stmt->execute(["%$keyword%"]);
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($users);

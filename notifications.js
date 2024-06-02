@@ -1,10 +1,10 @@
 $(document).ready(function() {
     const notificationList = $('#notification-list');
 
-    // Function to fetch and display notifications
+    // Fonction pour récupérer et afficher les notifications
     function fetchNotifications() {
         $.ajax({
-            url: 'notifications.php',
+            url: 'get_notifications.php',
             method: 'GET',
             success: function(notifications) {
                 notificationList.empty(); // Clear previous notifications
@@ -13,7 +13,7 @@ $(document).ready(function() {
                     notificationItems.forEach(notification => {
                         const notificationItem = $(`
                             <div class="notification-item">
-                                <p>${notification.message || 'Demande d\'ami en attente'}</p>
+                                <p>${notification.message}</p>
                             </div>
                         `);
                         notificationList.append(notificationItem);
